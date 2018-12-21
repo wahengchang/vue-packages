@@ -1,5 +1,9 @@
 <template>
-  <div id="app"><HelloWorld msg="Welcome to Your Vue.js App" /></div>
+  <div id="app">
+    <div class="demoWrapper">
+      <HelloWorld msg="Welcome to Your Vue.js App" />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -21,5 +25,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.demoWrapper{
+  border: red 1px solid;
 }
 </style>
