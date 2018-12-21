@@ -8,6 +8,7 @@
   },
   "version": "0.1.0",
   "scripts": {
+    "dev": "npm run serve",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build-bundle": "vue-cli-service build --target lib --name dateTimePicker src/build.js",
