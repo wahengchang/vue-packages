@@ -39,6 +39,7 @@ export default {
 .timeContainer {
   border: black 1px solid;
   width: 50%;
+  background: lightgray;
 }
 .row {
   display: flex;
