@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld/index.vue";
+import HelloWorld from "./components/DateTimePicker.vue";
 
 export default {
   name: "app",
@@ -26,7 +26,7 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.demoWrapper{
+.demoWrapper {
   border: red 1px solid;
 }
 </style>

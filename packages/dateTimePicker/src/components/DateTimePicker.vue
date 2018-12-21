@@ -1,24 +1,14 @@
 <template>
   <div class="wrapper">
     <div class="row">
-      <div class="dateContainer">
-        date picker
-      </div>
+      <div class="dateContainer">date picker</div>
       <div class="timeContainer">
-        <div class="startTime timeRow">
-          time picker
-        </div>
-        <div class="endTime timeRow">
-          time picker
-        </div>
+        <div class="startTime timeRow">time picker</div>
+        <div class="endTime timeRow">time picker</div>
       </div>
     </div>
 
-    <div class="row">
-      <button> cancel </button>
-      <button> submit </button>
-    </div>
-
+    <div class="row"><button>cancel</button> <button>submit</button></div>
   </div>
 </template>
 
@@ -33,12 +23,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.wrapper{
+.wrapper {
   border: black 1px solid;
   display: flex;
   flex-direction: column;
 }
-.dateContainer{
+.dateContainer {
   border: black 1px solid;
   width: 50%;
 }
