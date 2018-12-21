@@ -22,16 +22,18 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss" scoped>
 .wrapper {
   border: black 1px solid;
   display: flex;
   flex-direction: column;
+  .dateContainer {
+    border: black 1px solid;
+    width: 50%;
+    color: red;
+  }
 }
-.dateContainer {
-  border: black 1px solid;
-  width: 50%;
-}
+
 .timeContainer {
   border: black 1px solid;
   width: 50%;
