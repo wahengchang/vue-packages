@@ -3,8 +3,8 @@
     <div class="row">
       <div class="dateContainer">date picker</div>
       <div class="timeContainer">
-        <div class="startTime timeRow">time picker</div>
-        <div class="endTime timeRow">time picker</div>
+        <div class="startTime timeRow"> <time-picker /></div>
+        <div class="endTime timeRow"> <time-picker /></div>
       </div>
     </div>
 
@@ -13,8 +13,10 @@
 </template>
 
 <script>
+import TimePicker from './TimePicker'
 export default {
   name: "DateTimePicker",
+  components: { TimePicker },
   props: {
     msg: String
   }
