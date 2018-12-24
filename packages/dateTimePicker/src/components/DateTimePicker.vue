@@ -5,17 +5,13 @@
       <div class="timeContainer">
         <div class="startTime timeRow">
           <span class="subTitle">From</span>
-          <div>
-            <span class="bigNumber">5</span> Nov 2018
-          </div>
-          <time-picker format="hh:mm A"/>
+          <div><span class="bigNumber">5</span> Nov 2018</div>
+          <time-picker format="hh:mm A" />
         </div>
         <div class="endTime timeRow">
           <span class="subTitle">To</span>
-          <div>
-            <span class="bigNumber">7</span> Nov 2018
-          </div>
-          <time-picker format="hh:mm A"/>
+          <div><span class="bigNumber">7</span> Nov 2018</div>
+          <time-picker format="hh:mm A" />
         </div>
       </div>
     </div>
@@ -52,8 +48,6 @@ export default {
   flex-direction: column;
   .dateContainer {
     border: black 1px solid;
-    // width: 50%;
-    color: red;
   }
 }
 
