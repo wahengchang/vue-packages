@@ -30,5 +30,9 @@ npm run lint
 npm run test:unit
 ```
 
+![image](https://user-images.githubusercontent.com/5538753/50389246-e7e14380-0762-11e9-93e5-ed676f614a78.png)
+
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+ - [https://github.com/phoenixwong/vue2-timepicker](https://github.com/phoenixwong/vue2-timepicker)
