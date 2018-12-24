@@ -32,14 +32,14 @@ export default {
   flex-direction: column;
   .dateContainer {
     border: black 1px solid;
-    width: 50%;
+    // width: 50%;
     color: red;
   }
 }
 
 .timeContainer {
   border: black 1px solid;
-  width: 50%;
+  // width: 50%;
   background: lightgray;
 }
 .row {
