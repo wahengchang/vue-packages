@@ -9,7 +9,7 @@
       <ul class="calendar">
         <template v-for="(weekday, key) in weekdays">
           <li class="weekday" :key="'weekday' + key">
-            <span >{{ weekday }}</span>
+            <span>{{ weekday }}</span>
           </li>
         </template>
         <template v-for="(day, key) in 35">
@@ -29,12 +29,12 @@ export default {
   name: "DatePicker",
   components: { Arrow },
   methods: {
-    getDayStyle: function(day){
-      if(day === 5) return 'today'
-      if(day === 15) return 'startDate'
-      if(day === 25) return 'endDate'
-      if(day < 25 && day >15) return 'between'
-      return ''
+    getDayStyle: function(day) {
+      if (day === 5) return "today";
+      if (day === 15) return "startDate";
+      if (day === 25) return "endDate";
+      if (day < 25 && day > 15) return "between";
+      return "";
     }
   },
   data() {
@@ -104,17 +104,15 @@ export default {
       margin-bottom: 8px;
     }
     li.day {
-      // box-shadow: 0 0 0 1px red;
       span {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
+        width: 40px;
+        height: 40px;
         display: inline-block;
         text-align: center;
-        line-height: 36px;
+        line-height: 40px;
         font-size: 15px;
         font-weight: 600;
-        margin: 3px 5px;
+        margin: 3px;
         color: $slate-grey;
         background: #fff;
 
@@ -125,13 +123,18 @@ export default {
           transition-duration: 0.3s;
         }
         &.today {
-          border: 1px solid green;
+          box-shadow: 0 0 0 2px $secondary-01;
         }
         &.startDate {
+          background: $secondary-01;
+          color: #fff;
         }
         &.endDate {
+          background: $secondary-01;
+          color: #fff;
         }
         &.between {
+          background: #eaf0fd;
         }
       }
     }
