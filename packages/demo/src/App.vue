@@ -2,19 +2,38 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <HelloWorld2 />
+
+    <section class='componentContainer'>
+      <h1>TimePicker </h1>
+      <TimePicker />
+    </section>
+
+    <section class='componentContainer'>
+      <h1>DatePicker </h1>
+      <DatePicker />
+    </section>
+
+    <section class='componentContainer'>
+      <h1>DateTimePicker </h1>
+      <DateTimePicker />
+    </section>
+
+
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import {HelloWorld2} from "@lazy-copilot/noscraper";
+import {DateTimePicker, DatePicker, TimePicker} from "@lazy-copilot/dateTimePicker";
 
 export default {
   name: "app",
   components: {
     HelloWorld,
-    HelloWorld2
+    DateTimePicker,
+    DatePicker,
+    TimePicker
   }
 };
 </script>
@@ -27,5 +46,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.componentContainer{
+  border-top: 1px lightgray solid;
+  padding: 20px 0;
 }
 </style>

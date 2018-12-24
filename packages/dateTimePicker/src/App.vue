@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import DateTimePicker from "./components/DateTimePicker.vue";
+import {DateTimePicker} from "./components/DateTimePicker.vue";
 
 export default {
   name: "app",
