@@ -6,12 +6,12 @@
         <div class="startTime timeRow">
           <span class="subTitle">From</span>
           <div><span class="bigNumber">5</span> Nov 2018</div>
-          <time-picker format="hh:mm A" />
+          <time-picker format="hh:mm A" v-model="startTime" />
         </div>
         <div class="endTime timeRow">
           <span class="subTitle">To</span>
           <div><span class="bigNumber">7</span> Nov 2018</div>
-          <time-picker format="hh:mm A" />
+          <time-picker format="hh:mm A" v-model="endTime" />
         </div>
       </div>
     </div>
@@ -31,13 +31,28 @@ export default {
   components: { DatePicker, TimePicker },
   methods: {
     _submitHandler: function(){
-      return this.submitHandler({})
+      const {startTime, endTime} = this
+      return this.submitHandler({startTime, endTime})
     }
   },
   props: {
     submitHandler: Function
+  },
+  data: function() {
+    return {
+      startTime: {
+        hh: '00',
+        mm: '00',
+        A: 'AM'
+      },
+      endTime: {
+        hh: '12',
+        mm: '59',
+        A: 'PM'
+      }
+    }
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
