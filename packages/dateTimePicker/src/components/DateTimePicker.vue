@@ -7,13 +7,12 @@
         <div class="endTime timeRow"><time-picker /></div>
       </div>
     </div>
-
     <div class="row"><button>cancel</button> <button>submit</button></div>
   </div>
 </template>
 
 <script>
-import TimePicker from "./TimePicker";
+import TimePicker from "./TimePicker.vue";
 import DatePicker from "./DatePicker";
 
 export default {
