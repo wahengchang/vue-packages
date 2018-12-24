@@ -19,7 +19,10 @@
         </div>
       </div>
     </div>
-    <div class="row"><button>cancel</button> <button>submit</button></div>
+    <div class="row">
+      <button>cancel</button>
+      <button @click="_submitHandler">submit</button>
+    </div>
   </div>
 </template>
 
@@ -30,8 +33,13 @@ import DatePicker from "./DatePicker";
 export default {
   name: "DateTimePicker",
   components: { DatePicker, TimePicker },
+  methods: {
+    _submitHandler: function(){
+      return this.submitHandler({})
+    }
+  },
   props: {
-    msg: String
+    submitHandler: Function
   }
 };
 </script>
