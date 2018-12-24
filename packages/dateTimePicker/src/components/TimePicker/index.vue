@@ -1,14 +1,37 @@
+<template>
+<span class="time-picker">
+  <input class="display-time" :id="id" v-model="displayTime" @click.stop="toggleDropdown" type="text" readonly />
+  <span class="clear-btn" v-if="!hideClearButton" v-show="!showDropdown && showClearBtn" @click.stop="clearTime">&times;</span>
+  <div class="time-picker-overlay" v-if="showDropdown" @click.stop="toggleDropdown"></div>
+  <div class="dropdown" v-show="showDropdown">
+    <div class="select-list">
+      <ul class="hours">
+        <li class="hint" v-text="hourType"></li>
+        <li v-for="(hr, key) in hours" v-text="hr" :class="{active: hour === hr}" @click.stop="selectHandler('hour', hr)" :key="key + '-label'"></li>
+      </ul>
+      <ul class="minutes">
+        <li class="hint" v-text="minuteType"></li>
+        <li v-for="(m, key) in minutes" v-text="m" :class="{active: minute === m}" @click.stop="selectHandler('minute', m)"></li>
+      </ul>
+      <ul class="seconds" v-if="secondType">
+        <li class="hint" v-text="secondType"></li>
+        <li v-for="(s, key) in seconds" v-text="s" :class="{active: second === s}" @click.stop="selectHandler('second', s)"></li>
+      </ul>
+      <ul class="apms" v-if="apmType">
+        <li class="hint" v-text="apmType"></li>
+        <li v-for="(a, key) in apms" v-text="a" :class="{active: apm === a}" @click.stop="selectHandler('apm', a)"></li>
+      </ul>
+    </div>
+  </div>
+</span>
+</template>
+
 <script>
-const CONFIG = {
-  HOUR_TOKENS: ['HH', 'H', 'hh', 'h', 'kk', 'k'],
-  MINUTE_TOKENS: ['mm', 'm'],
-  SECOND_TOKENS: ['ss', 's'],
-  APM_TOKENS: ['A', 'a']
-}
+import {checkAcceptingType, formatValue, initUnitWithInterval, initApm, initHours} from './utils/format'
+import {formatConfig, MINUTE, SECOND} from './config'
 
 export default {
   name: 'VueTimepicker',
-
   props: {
     value: {type: Object},
     hideClearButton: {type: Boolean},
@@ -17,7 +40,6 @@ export default {
     secondInterval: {type: Number},
     id: {type: String}
   },
-
   data () {
     return {
       hours: [],
@@ -56,135 +78,55 @@ export default {
       return formatString
     },
     showClearBtn () {
-      if ((this.hour && this.hour !== '') || (this.minute && this.minute !== '')) {
-        return true
-      }
-      return false
+      return (this.hour || this.minute) ? true : false
     }
   },
 
   watch: {
     'format': 'renderFormat',
-    minuteInterval (newInteval) {
-      this.renderList('minute', newInteval)
-    },
-    secondInterval (newInteval) {
-      this.renderList('second', newInteval)
-    },
+    // minuteInterval (newInteval) {
+    //   this.renderList(MINUTE, newInteval)
+    // },
+    // secondInterval (newInteval) {
+    //   this.renderList(SECOND, newInteval)
+    // },
     'value': 'readValues',
     'displayTime': 'fillValues'
   },
 
   methods: {
-    formatValue (type, i) {
-      switch (type) {
-        case 'H':
-        case 'm':
-        case 's':
-          return String(i)
-        case 'HH':
-        case 'mm':
-        case 'ss':
-          return i < 10 ? `0${i}` : String(i)
-        case 'h':
-        case 'k':
-          return String(i + 1)
-        case 'hh':
-        case 'kk':
-          return (i + 1) < 10 ? `0${i + 1}` : String(i + 1)
-        default:
-          return ''
-      }
-    },
-
-    checkAcceptingType (validValues, formatString, fallbackValue) {
-      if (!validValues || !formatString || !formatString.length) { return '' }
-      for (let i = 0; i < validValues.length; i++) {
-        if (formatString.indexOf(validValues[i]) > -1) {
-          return validValues[i]
-        }
-      }
-      return fallbackValue || ''
-    },
-
     renderFormat (newFormat) {
+      const {minuteInterval, secondInterval} = this
+
       newFormat = newFormat || this.format
       if (!newFormat || !newFormat.length) {
         newFormat = 'HH:mm'
       }
 
-      this.hourType = this.checkAcceptingType(CONFIG.HOUR_TOKENS, newFormat, 'HH')
-      this.minuteType = this.checkAcceptingType(CONFIG.MINUTE_TOKENS, newFormat, 'mm')
-      this.secondType = this.checkAcceptingType(CONFIG.SECOND_TOKENS, newFormat)
-      this.apmType = this.checkAcceptingType(CONFIG.APM_TOKENS, newFormat)
+      this.hourType = checkAcceptingType(formatConfig.HOUR_TYPES, newFormat, 'HH')
+      this.minuteType = checkAcceptingType(formatConfig.MINUTE_TOKENS, newFormat, 'mm')
+      this.secondType = checkAcceptingType(formatConfig.SECOND_TOKENS, newFormat)
+      this.apmType = checkAcceptingType(formatConfig.APM_TOKENS, newFormat)
 
-      this.renderHoursList()
-      this.renderList('minute')
+      // start -=-=-=-= inint -=-=-=-=
+      this.hours = initHours(this.hourType)
 
+      this.minutes = [...initUnitWithInterval(this.minuteType, minuteInterval)]
+      
       if (this.secondType) {
-        this.renderList('second')
+        this.seconds = [...initUnitWithInterval(this.secondType, secondInterval)]
       }
 
       if (this.apmType) {
-        this.renderApmList()
+        this.apms = initApm(this.apmType)
       }
+      // end -=-=-=-= inint -=-=-=-=
 
       const self = this
       this.$nextTick(() => {
         self.readValues()
       })
     },
-
-    renderHoursList () {
-      const hoursCount = (this.hourType === 'h' || this.hourType === 'hh') ? 12 : 24
-      this.hours = []
-      for (let i = 0; i < hoursCount; i++) {
-        this.hours.push(this.formatValue(this.hourType, i))
-      }
-    },
-
-    renderList (listType, interval) {
-      if (listType === 'second') {
-        interval = interval || this.secondInterval
-      } else if (listType === 'minute') {
-        interval = interval || this.minuteInterval
-      } else {
-        return
-      }
-
-      if (interval === 0) {
-        interval = 60
-      } else if (interval > 60) {
-        window.console.warn('`' + listType + '-interval` should be less than 60. Current value is', interval)
-        interval = 1
-      } else if (interval < 1) {
-        window.console.warn('`' + listType + '-interval` should be NO less than 1. Current value is', interval)
-        interval = 1
-      } else if (!interval) {
-        interval = 1
-      }
-
-      if (listType === 'minute') {
-        this.minutes = []
-      } else {
-        this.seconds = []
-      }
-
-      for (let i = 0; i < 60; i += interval) {
-        if (listType === 'minute') {
-          this.minutes.push(this.formatValue(this.minuteType, i))
-        } else {
-          this.seconds.push(this.formatValue(this.secondType, i))
-        }
-      }
-    },
-
-    renderApmList () {
-      this.apms = []
-      if (!this.apmType) { return }
-      this.apms = this.apmType === 'A' ? ['AM', 'PM'] : ['am', 'pm']
-    },
-
     readValues () {
       if (!this.value || this.muteWatch) { return }
 
@@ -217,14 +159,17 @@ export default {
     fillValues () {
       let fullValues = {}
 
-      const baseHour = this.hour
-      const baseHourType = this.hourType
+      const {
+        hour :baseHour,
+        hour: baseHourType,
+        apm
+      } = this
 
-      const hourValue = baseHour || baseHour === 0 ? Number(baseHour) : ''
-      const baseOnTwelveHours = this.isTwelveHours(baseHourType)
-      const apmValue = (baseOnTwelveHours && this.apm) ? String(this.apm).toLowerCase() : false
+      const hourValue = (baseHour || baseHour === 0) ? Number(baseHour) : ''
+      const baseOnTwelveHours = baseHourType === 'h' || baseHourType === 'hh'
+      const apmValue = (baseOnTwelveHours && apm) ? `${apm}`.toLowerCase() : false
 
-      CONFIG.HOUR_TOKENS.forEach((token) => {
+      formatConfig.HOUR_TYPES.forEach((token) => {
         if (token === baseHourType) {
           fullValues[token] = baseHour
           return
@@ -323,7 +268,7 @@ export default {
 
       const self = this
 
-      const baseTimeValue = JSON.parse(JSON.stringify(this.value || {}))
+      const baseTimeValue = {...this.value}
       let timeValue = {}
 
       Object.keys(baseTimeValue).forEach((key) => {
@@ -337,20 +282,16 @@ export default {
       })
     },
 
-    isTwelveHours (token) {
-      return token === 'h' || token === 'hh'
-    },
-
     toggleDropdown () {
       this.showDropdown = !this.showDropdown
     },
 
-    select (type, value) {
+    selectHandler (type, value) {
       if (type === 'hour') {
         this.hour = value
-      } else if (type === 'minute') {
+      } else if (type === MINUTE) {
         this.minute = value
-      } else if (type === 'second') {
+      } else if (type === SECOND) {
         this.second = value
       } else if (type === 'apm') {
         this.apm = value
@@ -371,33 +312,6 @@ export default {
 }
 </script>
 
-<template>
-<span class="time-picker">
-  <input class="display-time" :id="id" v-model="displayTime" @click.stop="toggleDropdown" type="text" readonly />
-  <span class="clear-btn" v-if="!hideClearButton" v-show="!showDropdown && showClearBtn" @click.stop="clearTime">&times;</span>
-  <div class="time-picker-overlay" v-if="showDropdown" @click.stop="toggleDropdown"></div>
-  <div class="dropdown" v-show="showDropdown">
-    <div class="select-list">
-      <ul class="hours">
-        <li class="hint" v-text="hourType"></li>
-        <li v-for="(hr, key) in hours" v-text="hr" :class="{active: hour === hr}" @click.stop="select('hour', hr)" :key="key + '-label'"></li>
-      </ul>
-      <ul class="minutes">
-        <li class="hint" v-text="minuteType"></li>
-        <li v-for="(m, key) in minutes" v-text="m" :class="{active: minute === m}" @click.stop="select('minute', m)"></li>
-      </ul>
-      <ul class="seconds" v-if="secondType">
-        <li class="hint" v-text="secondType"></li>
-        <li v-for="(s, key) in seconds" v-text="s" :class="{active: second === s}" @click.stop="select('second', s)"></li>
-      </ul>
-      <ul class="apms" v-if="apmType">
-        <li class="hint" v-text="apmType"></li>
-        <li v-for="(a, key) in apms" v-text="a" :class="{active: apm === a}" @click.stop="select('apm', a)"></li>
-      </ul>
-    </div>
-  </div>
-</span>
-</template>
 
 <style scoped lang="scss">
 .time-picker {
