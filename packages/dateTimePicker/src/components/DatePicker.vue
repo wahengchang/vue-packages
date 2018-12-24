@@ -2,19 +2,19 @@
   <div>
     <div class="datePicker_wrap">
       <div class="calendar-header">
-        <span class="left">Left</span>
+        <span class="icon-left"> <arrow /> </span>
         <h3>Month 2018</h3>
-        <span class="right">Right</span>
+        <span class="icon-right"> <arrow /> </span>
       </div>
       <ul class="calendar">
         <template v-for="(weekday, key) in weekdays">
           <li class="weekday" :key="'weekday' + key">
-            <span>{{ weekday }}</span>
+            <span >{{ weekday }}</span>
           </li>
         </template>
         <template v-for="(day, key) in 35">
           <li class="day" :key="'day' + key">
-            <span>{{ day }}</span>
+            <span :class="getDayStyle(day)">{{ day }}</span>
           </li>
         </template>
       </ul>
@@ -23,12 +23,26 @@
 </template>
 
 <script>
+import Arrow from "./Icons/Arrow.vue";
+
 export default {
   name: "DatePicker",
-
+  components: { Arrow },
+  methods: {
+    getDayStyle: function(day){
+      if(day === 5) return 'today'
+      if(day === 15) return 'startDate'
+      if(day === 25) return 'endDate'
+      if(day < 25 && day >15) return 'between'
+      return ''
+    }
+  },
   data() {
     return {
-      weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+      weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      startDate: "01",
+      endDate: "15",
+      today: new Date()
     };
   }
 };
@@ -38,20 +52,46 @@ export default {
 @import "../style/main.scss";
 
 .datePicker_wrap {
-  height: 374px;
-  background: $pale-grey-two;
+  padding: 30px;
 
   .calendar-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: red;
+    margin-bottom: 25px;
+    .icon-right {
+      transform: rotate(180deg);
+    }
+
+    span {
+      width: 66px;
+      height: 42px;
+      background: $pale-grey-two;
+      color: $silver;
+      transition-duration: 0.3s;
+      border-radius: 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+        background: $secondary-01;
+        color: #fff;
+      }
+    }
+    .icon-left {
+      margin-left: 5px;
+    }
+    .icon-right {
+      margin-right: 5px;
+    }
     h3 {
       font-size: 18px;
       color: $dark;
     }
   }
-  ul.calendar {
+  .calendar {
     max-width: 400px;
     li {
       display: inline-block;
@@ -64,18 +104,35 @@ export default {
       margin-bottom: 8px;
     }
     li.day {
+      // box-shadow: 0 0 0 1px red;
       span {
         width: 36px;
         height: 36px;
         border-radius: 50%;
         display: inline-block;
-        margin: 3px 5px;
-        background: #fff;
-        color: $slate-grey;
         text-align: center;
         line-height: 36px;
         font-size: 15px;
         font-weight: 600;
+        margin: 3px 5px;
+        color: $slate-grey;
+        background: #fff;
+
+        &:hover {
+          cursor: pointer;
+          color: #fff;
+          background: $secondary-01;
+          transition-duration: 0.3s;
+        }
+        &.today {
+          border: 1px solid green;
+        }
+        &.startDate {
+        }
+        &.endDate {
+        }
+        &.between {
+        }
       }
     }
   }
