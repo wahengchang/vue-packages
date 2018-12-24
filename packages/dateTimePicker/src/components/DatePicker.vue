@@ -9,16 +9,12 @@
       <ul class="calendar">
         <template v-for="(weekday, key) in weekdays">
           <li class="weekday" :key="'weekday' + key">
-            <span v-if="isToday">{{ weekday }}</span>
-            <span v-if="isBetween">{{ weekday }}</span>
-            <span v-if="isStartDate">{{ weekday }}</span>
-            <span v-if="isEndDate">{{ weekday }}</span>
-            <span v-else>{{ weekday }}</span>
+            <span >{{ weekday }}</span>
           </li>
         </template>
         <template v-for="(day, key) in 35">
           <li class="day" :key="'day' + key">
-            <span>{{ day }}</span>
+            <span :class="getDayStyle(day)">{{ day }}</span>
           </li>
         </template>
       </ul>
@@ -27,12 +23,20 @@
 </template>
 
 <script>
-import arrow from "./arrow.vue";
+import Arrow from "./Icons/Arrow.vue";
 
 export default {
   name: "DatePicker",
-  components: { arrow },
-
+  components: { Arrow },
+  methods: {
+    getDayStyle: function(day){
+      if(day === 5) return 'today'
+      if(day === 15) return 'startDate'
+      if(day === 25) return 'endDate'
+      if(day < 25 && day >15) return 'between'
+      return ''
+    }
+  },
   data() {
     return {
       weekdays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
