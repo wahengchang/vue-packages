@@ -3,8 +3,20 @@
     <div class="row">
       <div class="dateContainer"><DatePicker /></div>
       <div class="timeContainer">
-        <div class="startTime timeRow"><time-picker format="hh:mm A"/></div>
-        <div class="endTime timeRow"><time-picker format="hh:mm A"/></div>
+        <div class="startTime timeRow">
+          <span class="subTitle">From</span>
+          <div>
+            <span class="bigNumber">5</span> Nov 2018
+          </div>
+          <time-picker format="hh:mm A"/>
+        </div>
+        <div class="endTime timeRow">
+          <span class="subTitle">To</span>
+          <div>
+            <span class="bigNumber">7</span> Nov 2018
+          </div>
+          <time-picker format="hh:mm A"/>
+        </div>
       </div>
     </div>
     <div class="row"><button>cancel</button> <button>submit</button></div>
@@ -39,8 +51,28 @@ export default {
 
 .timeContainer {
   border: black 1px solid;
-  // width: 50%;
-  background: lightgray;
+  width: 300px;
+
+  .timeRow {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-left: 50px;
+    padding-top: 35px;
+
+    .subTitle {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .bigNumber {
+      font-size: 25px;
+      letter-spacing: 10px;
+      line-height: 45px;
+      color: #0056ff;
+      font-weight: 100;
+    }
+  }
 }
 .row {
   display: flex;
