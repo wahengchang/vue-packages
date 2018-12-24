@@ -1,9 +1,12 @@
 // Import vue component
-import HelloWorld from './components/HelloWorld/index.vue';
+import DateTimePicker from './components/DateTimePicker.vue';
+import TimePicker from './components/TimePicker/index.vue';
+import DatePicker from './components/DatePicker.vue';
 
 const Components = {
-  HelloWorld,
-  HelloWorld2: HelloWorld
+  DateTimePicker,
+  TimePicker,
+  DatePicker,
 }
 
 // Declare install function executed by Vue.use()

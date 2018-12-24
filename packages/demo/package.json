@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "npm run serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@lazy-copilot/dateTimePicker": "^0.1.0",
     "@lazy-copilot/noscraper": "^0.1.0",
     "register-service-worker": "^1.5.2",
     "vue": "^2.5.17"
