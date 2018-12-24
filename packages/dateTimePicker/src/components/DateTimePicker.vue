@@ -3,8 +3,8 @@
     <div class="row">
       <div class="dateContainer"><DatePicker /></div>
       <div class="timeContainer">
-        <div class="startTime timeRow"><time-picker /></div>
-        <div class="endTime timeRow"><time-picker /></div>
+        <div class="startTime timeRow"><time-picker format="hh:mm A"/></div>
+        <div class="endTime timeRow"><time-picker format="hh:mm A"/></div>
       </div>
     </div>
     <div class="row"><button>cancel</button> <button>submit</button></div>
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import TimePicker from "./TimePicker.vue";
+import TimePicker from "./TimePicker/index.vue";
 import DatePicker from "./DatePicker";
 
 export default {
