@@ -120,6 +120,7 @@ export default {
       if (this.apmType) {
         this.apms = initApm(this.apmType)
       }
+
       // end -=-=-=-= inint -=-=-=-=
 
       const self = this
@@ -149,6 +150,7 @@ export default {
         this.second = 0
       }
 
+
       if (values.indexOf(this.apmType) > -1) {
         this.apm = timeValue[this.apmType]
       }
@@ -161,7 +163,7 @@ export default {
 
       const {
         hour :baseHour,
-        hour: baseHourType,
+        hourType: baseHourType,
         apm
       } = this
 
@@ -233,6 +235,7 @@ export default {
                 value = hourValue % 12 === 0 ? 12 : hourValue
               }
             }
+
             fullValues[token] = (token === 'hh' && value < 10) ? `0${value}` : String(value)
             fullValues.a = apm
             fullValues.A = apm.toUpperCase()
