@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
     <div class="row">
-      <div class="dateContainer">date picker</div>
+      <div class="dateContainer"><DatePicker /></div>
       <div class="timeContainer">
-        <div class="startTime timeRow"> <time-picker /></div>
-        <div class="endTime timeRow"> <time-picker /></div>
+        <div class="startTime timeRow"><time-picker /></div>
+        <div class="endTime timeRow"><time-picker /></div>
       </div>
     </div>
 
@@ -13,10 +13,12 @@
 </template>
 
 <script>
-import TimePicker from './TimePicker'
+import TimePicker from "./TimePicker";
+import DatePicker from "./DatePicker";
+
 export default {
   name: "DateTimePicker",
-  components: { TimePicker },
+  components: { DatePicker, TimePicker },
   props: {
     msg: String
   }
