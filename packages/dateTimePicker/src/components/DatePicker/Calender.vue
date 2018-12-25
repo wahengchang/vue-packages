@@ -26,7 +26,7 @@ import utils from "./utils/date";
 export default {
   name: "Calender",
   props: {
-    year: Number, 
+    year: Number,
     month: Number
   },
   methods: {
@@ -35,37 +35,40 @@ export default {
       if (day === 20) return "endDate";
       if (day < 20 && day > 15) return "between";
 
-      const {year, month} = this
-      const today = new Date()
-      if (utils.isSameDay(today, new Date(`${year}-${month+1}-${day}`)))
+      const { year, month } = this;
+      const today = new Date();
+      if (utils.isSameDay(today, new Date(`${year}-${month + 1}-${day}`)))
         return "today";
 
       return "";
     }
   },
   computed: {
-    startWeekday: function(){
-      return utils.getWeekday(new Date(`${this.year}-${this.month+1}-1`).getTime())
+    startWeekday: function() {
+      return utils.getWeekday(
+        new Date(`${this.year}-${this.month + 1}-1`).getTime()
+      );
     },
-    daysCount: function(){
-      return utils.daysInMonth(this.year, this.month)
-    },
+    daysCount: function() {
+      return utils.daysInMonth(this.year, this.month);
+    }
   },
   data() {
-    const {month} = this
+    const { month } = this;
     return {
       weekdays: utils.weekDayShortConfig
-    }
+    };
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
 @import "../../style/main.scss";
 
 .calendar {
-  max-width: 400px;
-  .nullBlock {}
+  max-width: 380px;
+  .nullBlock {
+  }
   li {
     display: inline-block;
     width: calc(100% / 7);
@@ -79,14 +82,14 @@ export default {
   }
   li.day {
     span {
-      width: 40px;
+      width: 100%;
       height: 40px;
       display: inline-block;
       text-align: center;
       line-height: 40px;
       font-size: 15px;
       font-weight: 600;
-      margin: 3px;
+      margin: 2px;
       color: $slate-grey;
       background: #fff;
 
@@ -97,7 +100,7 @@ export default {
         transition-duration: 0.3s;
       }
       &.today {
-        box-shadow: 0 0 0 2px $secondary-01;
+        box-shadow: inset 0 0 0 2px $secondary-01;
       }
       &.startDate {
         background: $secondary-01;
