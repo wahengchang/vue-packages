@@ -24,12 +24,4 @@ export default {
 
 <style lang="scss">
 @import "./style/main.scss";
-
-#app {
-  width: 760px;
-  background: #fff;
-}
-.demoWrapper {
-  /* border: red 1px solid; */
-}
 </style>

@@ -393,12 +393,12 @@ export default {
 @import "../../style/main.scss";
 
 .time-picker {
-  width: 180px;
+  width: 100%;
   font-size: 16px;
   position: relative;
 
   input.display-time {
-    width: 180px;
+    width: 100%;
     border: 1px solid $silver-two;
     border-radius: 3px;
     height: 48px;
@@ -439,7 +439,7 @@ export default {
     z-index: 5;
     background: #fff;
     box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
-    width: 180px;
+    width: 100%;
     height: 180px;
 
     .select-list {

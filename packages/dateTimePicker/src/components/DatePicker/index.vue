@@ -3,11 +3,15 @@
     <div class="datePicker_wrap">
       <div class="calendar-header">
         <span class="icon-left" @click="minusMonth"> <arrow /> </span>
-        <h3> {{currentMonthString}} {{currentYear}}</h3>
+        <h3>{{ currentMonthString }} {{ currentYear }}</h3>
         <span class="icon-right" @click="addMonth"> <arrow /> </span>
       </div>
 
-      <calender :today="firstDayOfMonth" :month="currentMonth" :year="currentYear"/>
+      <calender
+        :today="firstDayOfMonth"
+        :month="currentMonth"
+        :year="currentYear"
+      />
     </div>
   </div>
 </template>
@@ -15,48 +19,47 @@
 <script>
 import Arrow from "../Icons/Arrow.vue";
 import utils from "./utils/date";
-import Calender from './Calender.vue'
+import Calender from "./Calender.vue";
 
 export default {
   name: "DatePicker",
   components: { Arrow, Calender },
-  methods: {
-  },
+  methods: {},
   computed: {
-    currentMonthString: function(){
-      return utils.monthConfig[this.currentMonth]
+    currentMonthString: function() {
+      return utils.monthConfig[this.currentMonth];
     },
-    firstDayOfMonth: function(){
-      const {currentYear, currentMonth} = this
-      return new Date(`${currentYear}-${currentMonth}`)
+    firstDayOfMonth: function() {
+      const { currentYear, currentMonth } = this;
+      return new Date(`${currentYear}-${currentMonth}`);
     }
   },
   methods: {
-    addMonth: function(){
-      console.log(' -=-=-=-= addMonth, ')
-      if(this.currentMonth === 11) {
-        this.currentMonth = 0
-        this.currentYear +=1
-        return
+    addMonth: function() {
+      console.log(" -=-=-=-= addMonth, ");
+      if (this.currentMonth === 11) {
+        this.currentMonth = 0;
+        this.currentYear += 1;
+        return;
       }
 
-      return this.currentMonth += 1
+      return (this.currentMonth += 1);
     },
-    minusMonth: function(){
-      console.log(' -=-=-=-= minusMonth, ')
-      if(this.currentMonth === 0) {
-        this.currentMonth = 11
-        this.currentYear -=1
-        return
+    minusMonth: function() {
+      console.log(" -=-=-=-= minusMonth, ");
+      if (this.currentMonth === 0) {
+        this.currentMonth = 11;
+        this.currentYear -= 1;
+        return;
       }
 
-      return this.currentMonth -= 1
+      return (this.currentMonth -= 1);
     }
   },
   data() {
-    const today = new Date()
-    const defaultCurrentMonth = today.getMonth()
-    const defaultCurrentYear = today.getFullYear()
+    const today = new Date();
+    const defaultCurrentMonth = today.getMonth();
+    const defaultCurrentYear = today.getFullYear();
     return {
       today,
       currentYear: defaultCurrentYear,
@@ -71,8 +74,6 @@ export default {
 <style lang="scss" scoped>
 @import "../../style/main.scss";
 .datePicker_wrap {
-  padding: 30px;
-
   .calendar-header {
     display: flex;
     align-items: center;
@@ -86,7 +87,7 @@ export default {
       width: 66px;
       height: 42px;
       background: $pale-grey-two;
-      color: $silver;
+      color: $bluey-grey;
       transition-duration: 0.3s;
       border-radius: 2px;
       display: flex;
