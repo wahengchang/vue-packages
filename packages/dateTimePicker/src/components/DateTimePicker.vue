@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="dateTimePickerWrapper">
     <div class="row">
       <div class="dateContainer"><DatePicker /></div>
       <div class="timeContainer">
@@ -15,8 +15,8 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <button>cancel</button> <button @click="_submitHandler">submit</button>
+    <div class="row buttonRow">
+      <button @click="_submitHandler">submit</button> <button>cancel</button>
     </div>
   </div>
 </template>
@@ -57,10 +57,11 @@ export default {
 <style lang="scss" scoped>
 @import "../style/main.scss";
 
-.wrapper {
+.dateTimePickerWrapper {
   border: black 1px solid;
   display: flex;
   flex-direction: column;
+  width: 700px;
   .dateContainer {
     border: black 1px solid;
   }
@@ -87,6 +88,17 @@ export default {
       color: #0056ff;
       font-weight: 100;
     }
+  }
+}
+.buttonRow {
+  padding: 20px;
+  flex-direction: row-reverse;
+
+  button {
+    background: lightgray;
+    padding: 5px 10px;
+    margin: 0 10px;
+    border-radius: 5px;
   }
 }
 .row {
