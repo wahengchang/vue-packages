@@ -27,7 +27,7 @@ npm run lint
 
 ### Run your unit tests
 ```
-npm run test:unit
+npm run test
 ```
 
 ![image](https://user-images.githubusercontent.com/5538753/50389246-e7e14380-0762-11e9-93e5-ed676f614a78.png)

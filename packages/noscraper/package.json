@@ -8,10 +8,11 @@
   },
   "version": "0.1.0",
   "scripts": {
+    "precommit": "lint-staged; npm test",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build-bundle": "vue-cli-service build --target lib --name noScraper src/build.js",
-    "test:unit": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit"
   },
   "dependencies": {
     "vue": "^2.5.17"
