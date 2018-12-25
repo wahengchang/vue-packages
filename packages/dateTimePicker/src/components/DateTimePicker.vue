@@ -64,7 +64,7 @@ export default {
 
   .containerWrapper {
     display: flex;
-    padding: 40px 30px;
+    padding: 40px 30px 20px 30px;
     .dateContainer {
       padding: 0 30px;
       border-right: 1px solid $pale-grey;

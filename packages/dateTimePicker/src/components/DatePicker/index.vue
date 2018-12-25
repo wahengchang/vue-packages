@@ -2,9 +2,12 @@
   <div>
     <div class="datePicker_wrap">
       <div class="calendar-header">
-        <span class="icon-left" @click="minusMonth"> <arrow /> </span>
-        <h3>{{ currentMonthString }} {{ currentYear }}</h3>
-        <span class="icon-right" @click="addMonth"> <arrow /> </span>
+        <span class="arrow icon-left" @click="minusMonth"> <arrow /> </span>
+        <h3>
+          <span class="currentMonth">{{ currentMonthString }}</span>
+          <span class="currentYear">{{ currentYear }}</span>
+        </h3>
+        <span class="arrow icon-right" @click="addMonth"> <arrow /> </span>
       </div>
 
       <calender
@@ -83,7 +86,7 @@ export default {
       transform: rotate(180deg);
     }
 
-    span {
+    span.arrow {
       width: 66px;
       height: 42px;
       background: $pale-grey-two;
@@ -109,6 +112,10 @@ export default {
     h3 {
       font-size: 18px;
       color: $dark;
+    }
+    .currentYear {
+      font-weight: 400;
+      margin-left: 10px;
     }
   }
 }
