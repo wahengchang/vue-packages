@@ -24,6 +24,7 @@
 
 <script>
 import Arrow from "../Icons/Arrow.vue";
+import utils from "./utils/date";
 
 export default {
   name: "DatePicker",
