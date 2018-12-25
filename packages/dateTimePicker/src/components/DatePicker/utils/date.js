@@ -8,6 +8,23 @@ const weekDayConfig = [
   "Saturday"
 ];
 
+const weekDayShortConfig = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const monthConfig = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
+
 export const daysInMonth = (year, month) => {
   return 32 - new Date(year, month, 32).getDate();
 };
@@ -23,4 +40,18 @@ export const getWeekday = (date = "", isStringResult) => {
   return isStringResult ? "" : -1;
 };
 
-export default { daysInMonth, getWeekday };
+export const isSameDay = (d1, d2) => {
+  return (
+    d1.getFullYear() === d2.getFullYear() &&
+    d1.getMonth() === d2.getMonth() &&
+    d1.getDate() === d2.getDate()
+  );
+};
+
+export default {
+  daysInMonth,
+  getWeekday,
+  weekDayShortConfig,
+  monthConfig,
+  isSameDay
+};
