@@ -5,19 +5,18 @@
       <div class="timeContainer">
         <div class="startTime timeRow">
           <span class="subTitle">From</span>
-          <div><span class="bigNumber">5</span> Nov 2018</div>
+          <div><span class="bigNumber">15</span> Nov 2018</div>
           <time-picker format="hh:mm A" v-model="startTime" />
         </div>
         <div class="endTime timeRow">
           <span class="subTitle">To</span>
-          <div><span class="bigNumber">7</span> Nov 2018</div>
+          <div><span class="bigNumber">25</span> Nov 2018</div>
           <time-picker format="hh:mm A" v-model="endTime" />
         </div>
       </div>
     </div>
     <div class="row">
-      <button>cancel</button>
-      <button @click="_submitHandler">submit</button>
+      <button>cancel</button> <button @click="_submitHandler">submit</button>
     </div>
   </div>
 </template>
@@ -30,9 +29,9 @@ export default {
   name: "DateTimePicker",
   components: { DatePicker, TimePicker },
   methods: {
-    _submitHandler: function(){
-      const {startTime, endTime} = this
-      return this.submitHandler({startTime, endTime})
+    _submitHandler: function() {
+      const { startTime, endTime } = this;
+      return this.submitHandler({ startTime, endTime });
     }
   },
   props: {
@@ -41,22 +40,23 @@ export default {
   data: function() {
     return {
       startTime: {
-        hh: '00',
-        mm: '00',
-        A: 'AM'
+        hh: "00",
+        mm: "00",
+        A: "AM"
       },
       endTime: {
-        hh: '12',
-        mm: '59',
-        A: 'PM'
+        hh: "12",
+        mm: "59",
+        A: "PM"
       }
-    }
+    };
   }
-}
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+@import "../style/main.scss";
+
 .wrapper {
   border: black 1px solid;
   display: flex;
@@ -68,23 +68,21 @@ export default {
 
 .timeContainer {
   border: black 1px solid;
-  width: 300px;
 
   .timeRow {
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding-left: 50px;
-    padding-top: 35px;
+    padding: 50px 35px 0 35px;
 
     .subTitle {
       font-size: 12px;
-      color: gray;
+      color: $bluey-grey;
     }
 
     .bigNumber {
-      font-size: 25px;
-      letter-spacing: 10px;
+      font-size: 34px;
+      letter-spacing: 3px;
       line-height: 45px;
       color: #0056ff;
       font-weight: 100;

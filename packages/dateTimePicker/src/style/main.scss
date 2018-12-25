@@ -1,2 +1,6 @@
 @import "../style/_variable.scss";
 @import "../style/_reset.scss";
+
+*{
+    box-sizing: border-box;
+}

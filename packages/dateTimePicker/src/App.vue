@@ -7,13 +7,13 @@
 </template>
 
 <script>
-import {DateTimePicker} from "./components/DateTimePicker.vue";
+import DateTimePicker from "./components/DateTimePicker.vue";
 
 export default {
   name: "app",
   methods: {
-    submitHandler: function(data){
-      console.log('data: ', data)
+    submitHandler: function(data) {
+      console.log("data: ", data);
     }
   },
   components: {
