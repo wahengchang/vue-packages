@@ -22,17 +22,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "./style/main.scss";
+
 #app {
-  font-family: "Nunito Sans", sans-serif;
-  /* font-family: "Avenir", Helvetica, Arial, sans-serif; */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 760px;
+  background: #fff;
 }
 .demoWrapper {
-  border: red 1px solid;
+  /* border: red 1px solid; */
 }
 </style>
