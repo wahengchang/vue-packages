@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import Arrow from "./Icons/Arrow.vue";
+import Arrow from "../Icons/Arrow.vue";
 
 export default {
   name: "DatePicker",
@@ -49,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../style/main.scss";
+@import "../../style/main.scss";
 
 .datePicker_wrap {
   padding: 30px;

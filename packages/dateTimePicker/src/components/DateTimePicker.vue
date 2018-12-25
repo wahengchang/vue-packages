@@ -23,7 +23,7 @@
 
 <script>
 import TimePicker from "./TimePicker/index.vue";
-import DatePicker from "./DatePicker";
+import DatePicker from "./DatePicker/index.vue";
 
 export default {
   name: "DateTimePicker",
