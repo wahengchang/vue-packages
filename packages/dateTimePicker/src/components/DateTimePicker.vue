@@ -63,30 +63,27 @@ export default {
   flex-direction: column;
   width: 700px;
   .dateContainer {
-    border: black 1px solid;
+    border-right: 1px solid $silver-two;
   }
-}
+  .timeContainer {
+    .timeRow {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      padding: 50px 35px 0 35px;
 
-.timeContainer {
-  border: black 1px solid;
+      .subTitle {
+        font-size: 12px;
+        color: $bluey-grey;
+      }
 
-  .timeRow {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    padding: 50px 35px 0 35px;
-
-    .subTitle {
-      font-size: 12px;
-      color: $bluey-grey;
-    }
-
-    .bigNumber {
-      font-size: 34px;
-      letter-spacing: 3px;
-      line-height: 45px;
-      color: #0056ff;
-      font-weight: 100;
+      .bigNumber {
+        font-size: 34px;
+        letter-spacing: 3px;
+        line-height: 45px;
+        color: $secondary-01;
+        font-weight: 100;
+      }
     }
   }
 }
@@ -101,6 +98,7 @@ export default {
     border-radius: 5px;
   }
 }
+
 .row {
   display: flex;
 }

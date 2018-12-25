@@ -403,7 +403,7 @@ export default {
     border-radius: 3px;
     height: 48px;
     padding: 0 10px;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     transition-duration: 0.5s;
 
     &:hover {
@@ -438,7 +438,7 @@ export default {
     position: absolute;
     z-index: 5;
     background: #fff;
-    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
     width: 180px;
     height: 180px;
 
@@ -464,8 +464,8 @@ export default {
         }
         li {
           text-align: center;
-          padding: 0.3em 0;
-          color: #161616;
+          padding: 6px 0;
+          color: $dark;
           &.active,
           &.active:hover {
             background: $secondary-01;
@@ -474,15 +474,14 @@ export default {
         }
         li:not(.hint):hover {
           background: rgba(0, 0, 0, 0.08);
-          color: #161616;
+          color: $dark;
           cursor: pointer;
         }
       }
     }
     .hint {
-      color: #a5a5a5;
-      cursor: default;
-      font-size: 0.8em;
+      color: $bluey-grey;
+      font-size: 16px;
     }
   }
 }
