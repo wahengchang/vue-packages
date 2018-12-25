@@ -8,11 +8,12 @@
   },
   "version": "0.1.0",
   "scripts": {
+    "precommit": "lint-staged; npm test",
     "dev": "npm run serve",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build-bundle": "vue-cli-service build --target lib --name dateTimePicker src/build.js",
-    "test:unit": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit"
   },
   "dependencies": {
     "node-sass": "^4.11.0",
@@ -35,7 +36,7 @@
     "vue-template-compiler": "^2.5.17"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged; npm test"
   },
   "lint-staged": {
     "*.js": [
