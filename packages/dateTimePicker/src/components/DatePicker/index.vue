@@ -11,9 +11,11 @@
       </div>
 
       <calender
-        :today="firstDayOfMonth"
         :month="currentMonth"
         :year="currentYear"
+        :selectDayHandler="selectDayHandler"
+        :startDate="startDate"
+        :endDate="endDate"
       />
     </div>
   </div>
@@ -24,6 +26,14 @@ import Arrow from "../Icons/Arrow.vue";
 import utils from "./utils/date";
 import Calender from "./Calender.vue";
 
+const getDayAfter = (n) => {
+  const today = new Date();
+  const otherDay = new Date();
+  otherDay.setDate(today.getDate()+n);
+
+  return otherDay
+}
+
 export default {
   name: "DatePicker",
   components: { Arrow, Calender },
@@ -31,15 +41,10 @@ export default {
   computed: {
     currentMonthString: function() {
       return utils.monthConfig[this.currentMonth];
-    },
-    firstDayOfMonth: function() {
-      const { currentYear, currentMonth } = this;
-      return new Date(`${currentYear}-${currentMonth}`);
     }
   },
   methods: {
     addMonth: function() {
-      console.log(" -=-=-=-= addMonth, ");
       if (this.currentMonth === 11) {
         this.currentMonth = 0;
         this.currentYear += 1;
@@ -49,7 +54,6 @@ export default {
       return (this.currentMonth += 1);
     },
     minusMonth: function() {
-      console.log(" -=-=-=-= minusMonth, ");
       if (this.currentMonth === 0) {
         this.currentMonth = 11;
         this.currentYear -= 1;
@@ -57,18 +61,34 @@ export default {
       }
 
       return (this.currentMonth -= 1);
+    },
+    selectDayHandler: function(day){
+      const { currentYear, currentMonth, startDate, endDate } = this
+
+      const currentDay = new Date(`${currentYear}-${currentMonth + 1}-${day}`)
+
+      // update start
+      if(currentDay < startDate) return this.startDate = currentDay
+
+      if(currentDay > endDate) return this.endDate = currentDay
+
+      if(startDate < currentDay &&  currentDay < endDate) return this.endDate = currentDay
     }
   },
   data() {
     const today = new Date();
+
+    const yesterday = getDayAfter(-1)
+    const tomorrow = getDayAfter(1)
+
     const defaultCurrentMonth = today.getMonth();
     const defaultCurrentYear = today.getFullYear();
     return {
       today,
       currentYear: defaultCurrentYear,
       currentMonth: defaultCurrentMonth,
-      startDate: "01",
-      endDate: "15"
+      startDate: yesterday,
+      endDate: tomorrow
     };
   }
 };

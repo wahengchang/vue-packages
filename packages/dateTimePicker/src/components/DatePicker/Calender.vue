@@ -13,7 +13,7 @@
       </template>
       <template v-for="(day, key) in daysCount">
         <li class="day" :key="'day' + key">
-          <span :class="getDayStyle(day)">{{ day }}</span>
+          <span :class="getDayStyle(day)" @click="selectDayHandler(day)">{{ day }}</span>
         </li>
       </template>
     </ul>
@@ -23,23 +23,36 @@
 <script>
 import utils from "./utils/date";
 
+const isToday = (otherDay) => {
+  const today = new Date();
+  return utils.isSameDay(today, otherDay)
+}
+
+const betweenDays = (smallDay, bigDay, currentDay) => {
+  if(currentDay < bigDay && smallDay < currentDay) return true
+
+  return false
+}
+
 export default {
   name: "Calender",
   props: {
     year: Number,
-    month: Number
+    month: Number,
+    startDate: Date,
+    endDate: Date,
+    selectDayHandler: Function
   },
   methods: {
     getDayStyle: function(day) {
-      if (day === 15) return "startDate";
-      if (day === 20) return "endDate";
-      if (day < 20 && day > 15) return "between";
+      const {startDate, endDate, year, month} = this
+      const currentDay = new Date(`${year}-${month + 1}-${day}`)
 
-      const { year, month } = this;
-      const today = new Date();
-      if (utils.isSameDay(today, new Date(`${year}-${month + 1}-${day}`)))
-        return "today";
-
+      if (utils.isSameDay(currentDay, startDate)) return "startDate";
+      if (utils.isSameDay(currentDay, endDate)) return "endDate";
+      if (betweenDays(startDate, endDate, currentDay)) return "between";
+      if (isToday(currentDay)) return "today";
+      
       return "";
     }
   },
