@@ -13,9 +13,9 @@
       <calender
         :month="currentMonth"
         :year="currentYear"
-        :selectDayHandler="selectDayHandler"
         :startDate="startDate"
         :endDate="endDate"
+        @onChange="innerOnChange"
       />
     </div>
   </div>
@@ -26,24 +26,45 @@ import Arrow from "../Icons/Arrow.vue";
 import utils from "./utils/date";
 import Calender from "./Calender.vue";
 
-const getDayAfter = (n) => {
-  const today = new Date();
-  const otherDay = new Date();
-  otherDay.setDate(today.getDate()+n);
-
-  return otherDay
-}
-
 export default {
   name: "DatePicker",
   components: { Arrow, Calender },
-  methods: {},
+  props: {
+    startDate:{
+      default: new Date(),
+      type: Date,
+      required: true
+    } ,
+    endDate: {
+      default: null,
+      type: Date,
+      required: true
+    },
+    onChange: Function
+  },
   computed: {
     currentMonthString: function() {
       return utils.monthConfig[this.currentMonth];
     }
   },
+  watch: {
+    currentMonth: function () {
+      return this.callOnChange()
+    },
+  },
   methods: {
+    callOnChange: function(){
+      const {
+        currentMonth: month,
+        currentYear: year,
+        innerStartDate: startDate,
+        innerEndDate: endDate,
+        selectedDay
+      } = this
+
+      if(this.onChange)
+        this.onChange({ month,  year, startDate, endDate, selectedDay })
+    },
     addMonth: function() {
       if (this.currentMonth === 11) {
         this.currentMonth = 0;
@@ -62,33 +83,25 @@ export default {
 
       return (this.currentMonth -= 1);
     },
-    selectDayHandler: function(day){
-      const { currentYear, currentMonth, startDate, endDate } = this
-
-      const currentDay = new Date(`${currentYear}-${currentMonth + 1}-${day}`)
-
-      // update start
-      if(currentDay < startDate) return this.startDate = currentDay
-
-      if(currentDay > endDate) return this.endDate = currentDay
-
-      if(startDate < currentDay &&  currentDay < endDate) return this.endDate = currentDay
+    innerOnChange: function(data){
+      const { startDate, endDate, selectedDay } = data
+      this.innerStartDate = startDate
+      this.innerEndDate = endDate
+      this.selectedDay = selectedDay
+      return this.callOnChange()
     }
   },
   data() {
-    const today = new Date();
+    const {startDate, endDate} = this
 
-    const yesterday = getDayAfter(-1)
-    const tomorrow = getDayAfter(1)
-
-    const defaultCurrentMonth = today.getMonth();
-    const defaultCurrentYear = today.getFullYear();
+    const defaultCurrentMonth = startDate.getMonth();
+    const defaultCurrentYear = startDate.getFullYear();
     return {
-      today,
+      innerStartDate: startDate,
+      innerEndDate: endDate,
+      selectedDay: null,
       currentYear: defaultCurrentYear,
       currentMonth: defaultCurrentMonth,
-      startDate: yesterday,
-      endDate: tomorrow
     };
   }
 };

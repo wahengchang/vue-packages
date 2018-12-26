@@ -43,3 +43,13 @@ describe("date.getWeekday isStringResult=frue", () => {
     expect(date.getWeekday(null, true)).toBe("");
   });
 });
+
+describe("date.format", () => {
+  it("should return default format in yy-mm-dd", () => {
+    expect(date.format(new Date("2017-12-03"))).toBe("2017-12-03");
+  });
+
+  it("should return given format in yy-mm-dd", () => {
+    expect(date.format(new Date("2017-12-03"), "yy-mm-dd")).toBe("2017-12-03");
+  });
+});

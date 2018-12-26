@@ -12,7 +12,7 @@
     "dev": "npm run serve",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
-    "build-bundle": "vue-cli-service build --target lib --name dateTimePicker src/build.js",
+    "build-bundle": "vue-cli-service build --target lib --name dateTimePicker src/Build.js",
     "test": "vue-cli-service test:unit"
   },
   "dependencies": {

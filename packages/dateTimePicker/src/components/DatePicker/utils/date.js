@@ -48,10 +48,30 @@ export const isSameDay = (d1, d2) => {
   );
 };
 
+const yymmdd = date => {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return `${year}-${month}-${day}`;
+};
+
+export const format = (date, formatString) => {
+  if (formatString === "yy-mm-dd") return yymmdd(date);
+
+  console.warn("given date format is not found");
+  return yymmdd(date);
+};
+
 export default {
   daysInMonth,
   getWeekday,
   weekDayShortConfig,
   monthConfig,
-  isSameDay
+  isSameDay,
+  format
 };

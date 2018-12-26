@@ -401,7 +401,7 @@ export default {
     width: 100%;
     border: 1px solid $silver-two;
     border-radius: 3px;
-    height: 48px;
+    height: 50px;
     padding: 0 10px;
     letter-spacing: 4px;
     transition-duration: 0.5s;
