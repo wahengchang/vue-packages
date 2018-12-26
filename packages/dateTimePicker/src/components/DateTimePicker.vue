@@ -12,12 +12,20 @@
         <div class="startTime timeRow">
           <span class="subTitle">From</span>
           <div><span class="bigNumber">15</span> Nov 2018</div>
-          <time-picker format="hh:mm A" v-bind:value="defaultStartTime" @change="_onChangeTimeStart"/>
+          <time-picker
+            format="hh:mm A"
+            v-bind:value="defaultStartTime"
+            @change="_onChangeTimeStart"
+          />
         </div>
         <div class="endTime timeRow">
           <span class="subTitle">To</span>
           <div><span class="bigNumber">25</span> Nov 2018</div>
-          <time-picker format="hh:mm A" v-bind:value="defaultEndTime" @change="_onChangeTimeEnd"/>
+          <time-picker
+            format="hh:mm A"
+            v-bind:value="defaultEndTime"
+            @change="_onChangeTimeEnd"
+          />
         </div>
       </div>
     </div>
@@ -34,16 +42,16 @@ import DatePicker from "./DatePicker/index.vue";
 import utils from "./DatePicker/utils/date";
 
 const DEFAULT_START_TIME = {
-        hh: "00",
-        mm: "00",
-        A: "AM"
-      }
+  hh: "00",
+  mm: "00",
+  A: "AM"
+};
 
 const DEFAULT_END_TIME = {
-        hh: "12",
-        mm: "59",
-        A: "PM"
-      }
+  hh: "12",
+  mm: "59",
+  A: "PM"
+};
 
 const getDayAfter = (fromDay, n) => {
   const otherDay = new Date(fromDay);
@@ -56,46 +64,49 @@ export default {
   components: { DatePicker, TimePicker },
   methods: {
     _cancelHandler: function() {
-      if(this.$listeners.cancelHandler){
-        return this.$emit('cancelHandler')
+      if (this.$listeners.cancelHandler) {
+        return this.$emit("cancelHandler");
       }
-      if(this.cancelHandler) {
+      if (this.cancelHandler) {
         return this.cancelHandler();
       }
     },
     _submitHandler: function() {
       const { innerStartTime: startTime, innerEndTime: endTime } = this;
 
-      const { innerStartDate:startDate, innerEndDate:endDate} = this.$refs.datePickerRef
+      const {
+        innerStartDate: startDate,
+        innerEndDate: endDate
+      } = this.$refs.datePickerRef;
 
-      const startDateString = utils.format(startDate, 'yy-mm-dd')
-      const endDateString = utils.format(endDate, 'yy-mm-dd')
-      const startTimeString = `${startTime.HH}:${startTime.mm}`
-      const endTimeString = `${endTime.HH}:${endTime.mm}`
-      const startDateObject = new Date(`${startDateString}T${startTimeString}`)
-      const endDateObject = new Date(`${endDateString}T${endTimeString}`)
+      const startDateString = utils.format(startDate, "yy-mm-dd");
+      const endDateString = utils.format(endDate, "yy-mm-dd");
+      const startTimeString = `${startTime.HH}:${startTime.mm}`;
+      const endTimeString = `${endTime.HH}:${endTime.mm}`;
+      const startDateObject = new Date(`${startDateString}T${startTimeString}`);
+      const endDateObject = new Date(`${endDateString}T${endTimeString}`);
 
-      const returnData = { 
-          startAt: startDateObject,
-          endAt: endDateObject
-        }
+      const returnData = {
+        startAt: startDateObject,
+        endAt: endDateObject
+      };
 
-      if(this.$listeners.submitHandler){
-        return this.$emit('submitHandler', returnData)
+      if (this.$listeners.submitHandler) {
+        return this.$emit("submitHandler", returnData);
       }
 
-      if(this.submitHandler) {
+      if (this.submitHandler) {
         return this.submitHandler(returnData);
       }
     },
-    _onChangeTimeStart: function(val){
-      return this._onChangeTime('innerStartTime', val)
+    _onChangeTimeStart: function(val) {
+      return this._onChangeTime("innerStartTime", val);
     },
-    _onChangeTimeEnd: function(val){
-      return this._onChangeTime('innerEndTime', val)
+    _onChangeTimeEnd: function(val) {
+      return this._onChangeTime("innerEndTime", val);
     },
-    _onChangeTime: function(field, val){
-        this[field] = val.data
+    _onChangeTime: function(field, val) {
+      this[field] = val.data;
     }
   },
   props: {
@@ -106,19 +117,14 @@ export default {
     endTime: Object
   },
   data: function() {
-    const {
-      startDate,
-      endDate,
-      startTime,
-      endTime
-    } = this
-    const today = new Date()
+    const { startDate, endDate, startTime, endTime } = this;
+    const today = new Date();
 
     return {
       defaultStartTime: startTime || DEFAULT_START_TIME,
       defaultEndTime: endTime || DEFAULT_END_TIME,
       innerStartDate: startDate || today,
-      innerEndDate: endDate ||  getDayAfter(today, 2),
+      innerEndDate: endDate || getDayAfter(today, 2),
       innerStartTime: startTime,
       innerEndTime: endTime
     };

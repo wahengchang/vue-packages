@@ -13,10 +13,7 @@
       </template>
       <template v-for="(day, key) in daysCount">
         <li class="day" :key="'day' + key">
-          <span
-            :class="getDayStyle(day)"
-            @click="updateSelectingDay(day)"
-          >
+          <span :class="getDayStyle(day)" @click="updateSelectingDay(day)">
             {{ day }}
           </span>
         </li>
@@ -48,52 +45,49 @@ export default {
     onChange: Function
   },
   methods: {
-    updateSelectingDay: function(day){
-      if(!day) return
+    updateSelectingDay: function(day) {
+      if (!day) return;
 
       const {
-          year: currentYear,
-          month: currentMonth,
-          innerStartDate,
-          innerEndDate,
-          isSelectingStartDay
-        } = this;
+        year: currentYear,
+        month: currentMonth,
+        innerStartDate,
+        innerEndDate,
+        isSelectingStartDay
+      } = this;
 
       const currentDay = new Date(`${currentYear}-${currentMonth + 1}-${day}`);
 
       // reset
-      if(isSelectingStartDay) {
-        this.innerStartDate = currentDay
-        this.innerEndDate = currentDay
-        this.isSelectingStartDay = false
-      } 
-      // reset
-      else if (!isSelectingStartDay && currentDay<innerStartDate) {
-        this.innerStartDate = currentDay
-        this.innerEndDate = currentDay
-        this.isSelectingStartDay = false
+      if (isSelectingStartDay) {
+        this.innerStartDate = currentDay;
+        this.innerEndDate = currentDay;
+        this.isSelectingStartDay = false;
       }
-      else {
-        this.innerEndDate = currentDay
-        this.isSelectingStartDay = true
+      // reset
+      else if (!isSelectingStartDay && currentDay < innerStartDate) {
+        this.innerStartDate = currentDay;
+        this.innerEndDate = currentDay;
+        this.isSelectingStartDay = false;
+      } else {
+        this.innerEndDate = currentDay;
+        this.isSelectingStartDay = true;
       }
 
-      this.selectedDay = day
+      this.selectedDay = day;
       const returnData = {
         selectedDay: currentDay,
         endDate: this.innerEndDate,
         startDate: this.innerStartDate
-      }
-      
+      };
 
-      if(this.$listeners.onChange){
-        return this.$emit('onChange', {...returnData})
-      }
-
-      if(this.onChange) {
-        return this.onChange({...returnData});
+      if (this.$listeners.onChange) {
+        return this.$emit("onChange", { ...returnData });
       }
 
+      if (this.onChange) {
+        return this.onChange({ ...returnData });
+      }
     },
 
     getDayStyle: function(day) {
@@ -102,7 +96,8 @@ export default {
 
       if (utils.isSameDay(currentDay, innerStartDate)) return "innerStartDate";
       if (utils.isSameDay(currentDay, innerEndDate)) return "innerEndDate";
-      if (isBetweenDays(innerStartDate, innerEndDate, currentDay)) return "between";
+      if (isBetweenDays(innerStartDate, innerEndDate, currentDay))
+        return "between";
       if (isToday(currentDay)) return "today";
 
       return "";
@@ -122,7 +117,7 @@ export default {
     const { month, startDate, endDate } = this;
     return {
       selectedDay: null,
-      isSelectingStartDay: true,  // either startDay or endDay
+      isSelectingStartDay: true, // either startDay or endDay
       weekdays: utils.weekDayShortConfig,
       innerStartDate: startDate,
       innerEndDate: endDate

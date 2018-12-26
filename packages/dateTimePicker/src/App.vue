@@ -4,10 +4,10 @@
       <date-time-picker
         @submitHandler="submitHandler"
         @cancelHandler="cancelHandler"
-        :startDate = "startDate"
-        :endDate = "endDate"
-        :startTime = "startTime"
-        :endTime = "endTime"
+        :startDate="startDate"
+        :endDate="endDate"
+        :startTime="startTime"
+        :endTime="endTime"
       />
     </div>
   </div>
@@ -29,7 +29,7 @@ export default {
   components: {
     DateTimePicker
   },
-  data: function(){
+  data: function() {
     return {
       startTime: {
         hh: "05",
@@ -41,8 +41,8 @@ export default {
         mm: "21",
         A: "PM"
       },
-      startDate: new Date('2018-12-13'),
-      endDate: new Date('2018-12-16')
+      startDate: new Date("2018-12-13"),
+      endDate: new Date("2018-12-16")
     };
   }
 };

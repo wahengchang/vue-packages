@@ -30,11 +30,11 @@ export default {
   name: "DatePicker",
   components: { Arrow, Calender },
   props: {
-    startDate:{
+    startDate: {
       default: new Date(),
       type: Date,
       required: true
-    } ,
+    },
     endDate: {
       default: null,
       type: Date,
@@ -48,22 +48,22 @@ export default {
     }
   },
   watch: {
-    currentMonth: function () {
-      return this.callOnChange()
-    },
+    currentMonth: function() {
+      return this.callOnChange();
+    }
   },
   methods: {
-    callOnChange: function(){
+    callOnChange: function() {
       const {
         currentMonth: month,
         currentYear: year,
         innerStartDate: startDate,
         innerEndDate: endDate,
         selectedDay
-      } = this
+      } = this;
 
-      if(this.onChange)
-        this.onChange({ month,  year, startDate, endDate, selectedDay })
+      if (this.onChange)
+        this.onChange({ month, year, startDate, endDate, selectedDay });
     },
     addMonth: function() {
       if (this.currentMonth === 11) {
@@ -83,16 +83,16 @@ export default {
 
       return (this.currentMonth -= 1);
     },
-    innerOnChange: function(data){
-      const { startDate, endDate, selectedDay } = data
-      this.innerStartDate = startDate
-      this.innerEndDate = endDate
-      this.selectedDay = selectedDay
-      return this.callOnChange()
+    innerOnChange: function(data) {
+      const { startDate, endDate, selectedDay } = data;
+      this.innerStartDate = startDate;
+      this.innerEndDate = endDate;
+      this.selectedDay = selectedDay;
+      return this.callOnChange();
     }
   },
   data() {
-    const {startDate, endDate} = this
+    const { startDate, endDate } = this;
 
     const defaultCurrentMonth = startDate.getMonth();
     const defaultCurrentYear = startDate.getFullYear();
@@ -101,7 +101,7 @@ export default {
       innerEndDate: endDate,
       selectedDay: null,
       currentYear: defaultCurrentYear,
-      currentMonth: defaultCurrentMonth,
+      currentMonth: defaultCurrentMonth
     };
   }
 };

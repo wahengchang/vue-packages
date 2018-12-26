@@ -48,8 +48,13 @@
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import {HelloWorld2} from "@lazy-copilot/noscraper";
-import {DateTimePicker, DatePicker, TimePicker, Calender} from "@lazy-copilot/dateTimePicker";
+import { HelloWorld2 } from "@lazy-copilot/noscraper";
+import {
+  DateTimePicker,
+  DatePicker,
+  TimePicker,
+  Calender
+} from "@lazy-copilot/dateTimePicker";
 
 export default {
   name: "app",
@@ -60,13 +65,13 @@ export default {
     TimePicker,
     Calender
   },
-  data: function(){
+  data: function() {
     return {
       tapIndex: 0,
       currentMonth: 11,
       currentYear: 2018,
-      startDate: new Date('2018-12-18'),
-      endDate: new Date('2018-12-11'),
+      startDate: new Date("2018-12-18"),
+      endDate: new Date("2018-12-11"),
       startTime: {
         hh: "05",
         mm: "23",
@@ -76,8 +81,8 @@ export default {
         hh: "11",
         mm: "21",
         A: "PM"
-      },
-    }
+      }
+    };
   }
 };
 </script>
@@ -92,7 +97,7 @@ export default {
   margin-top: 60px;
 }
 
-.componentContainer{
+.componentContainer {
   border-top: 1px lightgray solid;
   padding: 20px 0;
 }
