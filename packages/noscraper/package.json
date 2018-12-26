@@ -6,7 +6,7 @@
   "browser": {
     "./sfc": "src/components/noScraper.vue"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "precommit": "lint-staged; npm test",
     "serve": "vue-cli-service serve",

@@ -1,12 +1,12 @@
 {
-  "name": "@lazy-copilot/dateTimePicker",
+  "name": "@lazy-copilot/date-time-picker",
   "main": "./dist/dateTimePicker.common.js",
   "module": "dist/dateTimePicker.esm.js",
   "unpkg": "dist/dateTimePicker.min.js",
   "browser": {
     "./sfc": "src/components/dateTimePicker.vue"
   },
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "precommit": "lint-staged; npm test",
     "dev": "npm run serve",
