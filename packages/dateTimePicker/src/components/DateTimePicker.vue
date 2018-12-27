@@ -6,12 +6,17 @@
           ref="datePickerRef"
           :startDate="innerStartDate"
           :endDate="innerEndDate"
+          @onChange="_onChangeDate"
         />
       </div>
       <div class="timeContainer">
         <div class="startTime timeRow">
           <span class="subTitle">From</span>
-          <div><span class="bigNumber">15</span> Nov 2018</div>
+          <div>
+            <span class="bigNumber">{{innerStartDate.getDate()}}</span> 
+            {{getShortMonth(innerStartDate.getMonth())}} 
+            {{innerStartDate.getFullYear()}}
+          </div>
           <time-picker
             format="hh:mm A"
             v-bind:value="defaultStartTime"
@@ -20,7 +25,11 @@
         </div>
         <div class="endTime timeRow">
           <span class="subTitle">To</span>
-          <div><span class="bigNumber">25</span> Nov 2018</div>
+          <div>
+            <span class="bigNumber">{{innerEndDate.getDate()}}</span> 
+            {{getShortMonth(innerEndDate.getMonth())}}  
+            {{innerEndDate.getFullYear()}}
+          </div>
           <time-picker
             format="hh:mm A"
             v-bind:value="defaultEndTime"
@@ -63,6 +72,9 @@ export default {
   name: "DateTimePicker",
   components: { DatePicker, TimePicker },
   methods: {
+    getShortMonth: function(monthIndex){
+      return utils.monthShortConfig[monthIndex]
+    },
     _cancelHandler: function() {
       if (this.$listeners.cancelHandler) {
         return this.$emit("cancelHandler");
@@ -98,6 +110,11 @@ export default {
       if (this.submitHandler) {
         return this.submitHandler(returnData);
       }
+    },
+    _onChangeDate: function(data){
+      const { startDate, endDate} = data
+      this.innerStartDate = startDate
+      this.innerEndDate = endDate
     },
     _onChangeTimeStart: function(val) {
       return this._onChangeTime("innerStartTime", val);

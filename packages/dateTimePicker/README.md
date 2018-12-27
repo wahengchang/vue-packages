@@ -33,7 +33,7 @@ $ yarn add @lazy-copilot/datetimepicker
 </template>
 
 <script>
-import '@lazy-copilot/datetimepicker/dist/dateTimePicker.css'
+import '@lazy-copilot/datetimepicker/dist/datetimepicker.css'
 import { DateTimePicker } from "@lazy-copilot/datetimepicker";
 
 export default {

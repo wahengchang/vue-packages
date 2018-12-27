@@ -25,6 +25,9 @@ const monthConfig = [
   "December"
 ];
 
+const monthShortConfig = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+
 export const daysInMonth = (year, month) => {
   return 32 - new Date(year, month, 32).getDate();
 };
@@ -72,6 +75,7 @@ export default {
   getWeekday,
   weekDayShortConfig,
   monthConfig,
+  monthShortConfig,
   isSameDay,
   format
 };

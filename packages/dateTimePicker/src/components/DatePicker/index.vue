@@ -15,7 +15,7 @@
         :year="currentYear"
         :startDate="startDate"
         :endDate="endDate"
-        @onChange="innerOnChange"
+        @onChange="_onChange"
       />
     </div>
   </div>
@@ -62,8 +62,13 @@ export default {
         selectedDay
       } = this;
 
-      if (this.onChange)
-        this.onChange({ month, year, startDate, endDate, selectedDay });
+    const returnData = { month, year, startDate, endDate, selectedDay }
+    if (this.$listeners.onChange) {
+      this.$emit("onChange", returnData);
+    }
+    if (this.onChange) {
+      this.onChange(returnData);
+    }
     },
     addMonth: function() {
       if (this.currentMonth === 11) {
@@ -83,7 +88,7 @@ export default {
 
       return (this.currentMonth -= 1);
     },
-    innerOnChange: function(data) {
+    _onChange: function(data) {
       const { startDate, endDate, selectedDay } = data;
       this.innerStartDate = startDate;
       this.innerEndDate = endDate;

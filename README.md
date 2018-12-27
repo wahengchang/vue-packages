@@ -7,7 +7,7 @@ Add a dependency to matched packages
 ```
 $ lerna add module-1 --scope=module-2
 
-// lerna add @lazy-copilot/dateTimePicker --scope=@demo
+// lerna add @lazy-copilot/datetimepicker --scope=@demo
 ```
 
 ## bootstrap
