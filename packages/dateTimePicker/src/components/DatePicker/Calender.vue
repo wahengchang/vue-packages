@@ -159,8 +159,7 @@ export default {
 
 .calendar {
   max-width: 380px;
-  .nullBlock {
-  }
+
   li {
     display: inline-block;
     width: calc(100% / 7);

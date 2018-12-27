@@ -67,14 +67,14 @@ export default {
         selectedDay
       } = this;
 
-    const returnData = { month, year, startDate, endDate, selectedDay }
+      const returnData = { month, year, startDate, endDate, selectedDay };
 
-    if (this.$listeners.onChange) {
-      this.$emit("onChange", returnData);
-    }
-    if (this.onChange) {
-      this.onChange(returnData);
-    }
+      if (this.$listeners.onChange) {
+        this.$emit("onChange", returnData);
+      }
+      if (this.onChange) {
+        this.onChange(returnData);
+      }
     },
     addMonth: function() {
       if (this.currentMonth === 11) {
@@ -124,6 +124,7 @@ export default {
 @import "../../style/main.scss";
 .datePicker_wrap {
   .calendar-header {
+    width: 380px;
     display: flex;
     align-items: center;
     justify-content: space-between;
