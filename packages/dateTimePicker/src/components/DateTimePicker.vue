@@ -2,7 +2,7 @@
   <div class="dateTimePickerModal">
     <a class="calendarTrigger" @click="isOpen = !isOpen">
       <icon-calendar class="iconCalendar" />
-      <input type="text" class="calendarInput" />
+      <input type="text" class="calendarInput" :value="selectDateString" />
     </a>
 
     <date-time-picker-modal
@@ -15,17 +15,35 @@
 <script>
 import DateTimePickerModal from "./DateTimePickerModal.vue";
 import iconCalendar from "./Icons/Calendar.vue";
+import utils from "./DatePicker/utils/date";
 
 export default {
   name: "DateTimePicker",
   components: { DateTimePickerModal, iconCalendar },
   methods: {
     submitHandler: function(data) {
-      // console.log(" -=-=-= submitHandler ", data);
+      const startYear = data.startAt.getFullYear();
+      const startMonth = utils.monthShortConfig[data.startAt.getMonth()];
+      const starDate = data.startAt.getDate();
+      const startHour = data.startTime.hh;
+      const startMinute = data.startTime.mm;
+      const startAa = data.startTime.A;
+
+      const endYear = data.endAt.getFullYear();
+      const endMonth = utils.monthShortConfig[data.endAt.getMonth()];
+      const endDate = data.endAt.getDate();
+      const endHour = data.endTime.hh;
+      const endMinute = data.endTime.mm;
+      const endAa = data.endTime.A;
+
+      this.selectDateString = `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}   -   ${endYear} ${endMonth} ${endDate}  ${endHour}:${endMinute} ${endAa}`;
     }
   },
-  data: function() {
-    return { isOpen: false };
+  data() {
+    return {
+      isOpen: false,
+      selectDateString: ""
+    };
   }
 };
 </script>
@@ -75,6 +93,8 @@ export default {
     .calendarInput {
       background: #fff;
       position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       color: $secondary-01;
