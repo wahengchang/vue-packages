@@ -25,6 +25,9 @@ import utils from "./DatePicker/utils/date";
 export default {
   name: "DateTimePicker",
   components: { DateTimePickerModal, iconCalendar },
+  props: {
+    onChange: Function
+  },
   methods: {
     submitHandler: function(data) {
       const startYear = data.startAt.getFullYear();
@@ -44,6 +47,15 @@ export default {
       this.selectDateString = `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}   -   ${endYear} ${endMonth} ${endDate}  ${endHour}:${endMinute} ${endAa}`;
 
       this.isOpen = false;
+
+
+      if (this.$listeners.onChange) {
+        return this.$emit("onChange", {...data});
+      }
+
+      if (this.onChange) {
+        return this.onChange({...data});
+      }
     }
   },
   data() {
