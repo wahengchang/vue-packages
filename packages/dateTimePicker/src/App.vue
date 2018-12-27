@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div class="demoWrapper">
-      <date-time-picker-modal></date-time-picker-modal>
+      <date-time-picker></date-time-picker>
 
-      <date-time-picker
+      <date-time-picker-modal
         style="display:none"
         @submitHandler="submitHandler"
         @cancelHandler="cancelHandler"
