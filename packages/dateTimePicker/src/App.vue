@@ -13,19 +13,27 @@
       <TimePicker />
     </section>
 
-    <section class="componentContainer" v-if="tapIndex === 1">
-      <h1>Calender</h1>
+    <section class='componentContainer' v-if="tapIndex === 1">
+      <h1>Calender </h1>
+      <span>{{calenderValue}}</span>
       <Calender
         :month="currentMonth"
         :year="currentYear"
         :startDate="startDate"
         :endDate="endDate"
+        @onChange="calenderValue = $event"
       />
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 2">
-      <h1>DatePicker</h1>
-      <DatePicker :startDate="startDate" :endDate="endDate" />
+      <h1>DatePicker </h1>
+      <span>{{datePickerValue}}</span>
+      <DatePicker
+        :startDate="startDate"
+        :endDate="endDate"
+        :singleDate="true"
+        @onChange="datePickerValue = $event"
+      />
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 3">
@@ -47,6 +55,7 @@
         :endDate="endDate"
         :startTime="startTime"
         :endTime="endTime"
+        :singleDate="true"
       />
     </section>
   </div>
@@ -78,6 +87,8 @@ export default {
   },
   data: function() {
     return {
+      calenderValue: null,
+      datePickerValue: null,
       tapIndex: 0,
       startTime: {
         hh: "05",

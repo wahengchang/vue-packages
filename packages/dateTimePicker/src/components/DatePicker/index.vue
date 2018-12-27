@@ -15,6 +15,7 @@
         :year="currentYear"
         :startDate="startDate"
         :endDate="endDate"
+        :singleDate="singleDate"
         @onChange="_onChange"
       />
     </div>
@@ -39,6 +40,10 @@ export default {
       default: null,
       type: Date,
       required: true
+    },
+    singleDate: {
+      type: Boolean,
+      default: false
     },
     onChange: Function
   },
