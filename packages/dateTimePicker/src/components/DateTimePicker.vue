@@ -12,6 +12,7 @@
 
     <date-time-picker-modal
       :class="isOpen ? 'fadeInDown' : ''"
+      :singleDate="singleDate"
       @submitHandler="submitHandler"
     />
   </div>
@@ -26,10 +27,37 @@ export default {
   name: "DateTimePicker",
   components: { DateTimePickerModal, iconCalendar },
   props: {
+    singleDate: {
+      type: Boolean,
+      default: false
+    },
     onChange: Function
   },
   methods: {
-    submitHandler: function(data) {
+    callOnChange: function(returnData) {
+      if (this.$listeners.onChange) {
+        return this.$emit("onChange", { ...returnData });
+      }
+
+      if (this.onChange) {
+        return this.onChange({ ...returnData });
+      }
+    },
+    _submitSingleHandler: function(data){
+      const startYear = data.startAt.getFullYear();
+      const startMonth = utils.monthShortConfig[data.startAt.getMonth()];
+      const starDate = data.startAt.getDate();
+      const startHour = data.startTime.hh;
+      const startMinute = data.startTime.mm;
+      const startAa = data.startTime.A;
+
+      this.selectDateString = `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}`;
+
+      this.isOpen = false;
+
+      return this.callOnChange(data)
+    },
+    _submitMultiHandler: function(data){
       const startYear = data.startAt.getFullYear();
       const startMonth = utils.monthShortConfig[data.startAt.getMonth()];
       const starDate = data.startAt.getDate();
@@ -48,14 +76,10 @@ export default {
 
       this.isOpen = false;
 
-
-      if (this.$listeners.onChange) {
-        return this.$emit("onChange", {...data});
-      }
-
-      if (this.onChange) {
-        return this.onChange({...data});
-      }
+      return this.callOnChange(data)
+    },
+    submitHandler: function(data) {
+      return this.singleDate ? this._submitSingleHandler(data) : this._submitMultiHandler(data)
     }
   },
   data() {
