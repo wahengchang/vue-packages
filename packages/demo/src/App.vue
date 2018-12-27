@@ -54,7 +54,7 @@ import {
   DatePicker,
   TimePicker,
   Calender
-} from "@lazy-copilot/dateTimePicker";
+} from "@lazy-copilot/datetimepicker";
 
 export default {
   name: "app",
