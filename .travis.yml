@@ -12,7 +12,7 @@ before_script:
   - yarn bootstrap
 script:
   - yarn test
-  - yarn prepublish
+  - yarn build-bundle
 before_deploy:
   - git config --global user.email ${GITHUB_EMAIL}
   - git config --global user.name ${GITHUB_USER}
