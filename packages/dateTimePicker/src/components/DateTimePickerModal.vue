@@ -6,7 +6,8 @@
           ref="datePickerRef"
           :startDate="innerStartDate"
           :endDate="innerEndDate"
-          @onChange="_onChangeDate"
+          @onChange="__onChange"
+          :singleDate="singleDate"
         />
       </div>
       <div class="timeContainer">
@@ -23,7 +24,7 @@
             @change="_onChangeTimeStart"
           />
         </div>
-        <div class="endTime timeRow">
+        <div class="endTime timeRow" v-if="!singleDate">
           <span class="subTitle">To</span>
           <div>
             <span class="bigNumber">{{ innerEndDate.getDate() }}</span>
@@ -39,8 +40,8 @@
       </div>
     </div>
     <div class="buttonWrap">
-      <button class="confirm" @click="_submitHandler">submit</button>
-      <button class="cancel" @click="_cancelHandler">cancel</button>
+      <button class="confirm" @click="__onSubmit">submit</button>
+      <button class="cancel" @click="__onCancel">cancel</button>
     </div>
   </div>
 </template>
@@ -72,18 +73,45 @@ export default {
   name: "DateTimePickerModal",
   components: { DatePicker, TimePicker },
   methods: {
+    callEvent: function(eventName, data){
+      if (this.$listeners[eventName]) {
+        return this.$emit(eventName, data);
+      }
+      if (this[eventName]) {
+        return this[eventName](data);
+      }
+    },
+    __onChange: function(data){
+        return this.singleDate? this._onChangeSingleDate(data) : this._onChangeMultiDate(data)
+    },
+    __onSubmit: function(data) {
+        return this.singleDate? this._submitSingleHandler(data) : this._submitMultiHandler(data)
+    },
     getShortMonth: function(monthIndex) {
       return utils.monthShortConfig[monthIndex];
     },
-    _cancelHandler: function() {
-      if (this.$listeners.cancelHandler) {
-        return this.$emit("cancelHandler");
-      }
-      if (this.cancelHandler) {
-        return this.cancelHandler();
-      }
+    __onCancel: function() {
+      return this.callEvent('cancelHandler')
     },
-    _submitHandler: function() {
+    _submitSingleHandler: function(){
+      const { innerStartTime: startTime, innerEndTime: endTime } = this;
+
+      const {
+        innerStartDate: startDate,
+      } = this.$refs.datePickerRef;
+
+      const startDateString = utils.format(startDate, "yy-mm-dd");
+      const startTimeString = `${startTime.HH}:${startTime.mm}`;
+      const startDateObject = new Date(`${startDateString}T${startTimeString}`);
+
+      const returnData = {
+        startAt: startDateObject,
+        startTime,
+      };
+
+      return this.callEvent('submitHandler', returnData)
+    },
+    _submitMultiHandler: function(data){
       const { innerStartTime: startTime, innerEndTime: endTime } = this;
 
       const {
@@ -105,18 +133,16 @@ export default {
         endTime
       };
 
-      if (this.$listeners.submitHandler) {
-        return this.$emit("submitHandler", returnData);
-      }
-
-      if (this.submitHandler) {
-        return this.submitHandler(returnData);
-      }
+      return this.callEvent('submitHandler', returnData)
     },
-    _onChangeDate: function(data) {
+    _onChangeMultiDate: function(data) {
       const { startDate, endDate } = data;
       this.innerStartDate = startDate;
       this.innerEndDate = endDate;
+    },
+    _onChangeSingleDate: function(data) {
+      const { startDate } = data;
+      this.innerStartDate = startDate;
     },
     _onChangeTimeStart: function(val) {
       return this._onChangeTime("innerStartTime", val);
@@ -133,7 +159,11 @@ export default {
     startDate: Date,
     endDate: Date,
     startTime: Object,
-    endTime: Object
+    endTime: Object,
+    singleDate: {
+      type: Boolean,
+      default: false
+    }
   },
   data: function() {
     const { startDate, endDate, startTime, endTime } = this;
