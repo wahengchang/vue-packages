@@ -9,5 +9,6 @@
       "message": "chore(release): publish %s"
     }
   },
-  "lerna": "2.11.0"
+  "lerna": "2.11.0",
+  "npmClient": "yarn"
 }

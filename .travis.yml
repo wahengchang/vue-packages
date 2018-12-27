@@ -25,5 +25,6 @@ deploy:
   script: "yarn run lerna:publish"
   skip_cleanup: true
   on:
-    node: "10"
     branch: master
+    node: "8"
+    tags: true
