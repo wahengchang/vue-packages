@@ -100,7 +100,9 @@ export default {
 
       const returnData = {
         startAt: startDateObject,
-        endAt: endDateObject
+        endAt: endDateObject,
+        startTime,
+        endTime
       };
 
       if (this.$listeners.submitHandler) {

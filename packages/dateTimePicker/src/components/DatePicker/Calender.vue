@@ -13,11 +13,19 @@
       </template>
       <template v-for="(day, key) in daysCount">
         <li class="day" :key="'day' + key">
-          <span v-if="!singleDate" :class="getDayStyle(day)" @click="updateSelectingDay(day)">
+          <span
+            v-if="!singleDate"
+            :class="getDayStyle(day)"
+            @click="updateSelectingDay(day)"
+          >
             {{ day }}
           </span>
 
-          <span v-if="singleDate" :class="getDayStyle(day)" @click="updateSelectingSingleDay(day)">
+          <span
+            v-if="singleDate"
+            :class="getDayStyle(day)"
+            @click="updateSelectingSingleDay(day)"
+          >
             {{ day }}
           </span>
         </li>
@@ -53,7 +61,7 @@ export default {
     }
   },
   methods: {
-    callOnChange: function(returnData){
+    callOnChange: function(returnData) {
       if (this.$listeners.onChange) {
         return this.$emit("onChange", { ...returnData });
       }
@@ -62,7 +70,7 @@ export default {
         return this.onChange({ ...returnData });
       }
     },
-    updateSelectingSingleDay: function(day){
+    updateSelectingSingleDay: function(day) {
       if (!day) return;
 
       const { year, month, innerStartDate, innerEndDate } = this;
@@ -74,7 +82,7 @@ export default {
       return this.callOnChange({
         selectedDay: currentDay,
         startDate: this.innerStartDate
-      })
+      });
     },
     updateSelectingDay: function(day) {
       if (!day) return;
@@ -91,7 +99,7 @@ export default {
 
       // reset
       if (
-        isSelectingStartDay || 
+        isSelectingStartDay ||
         (!isSelectingStartDay && currentDay < innerStartDate)
       ) {
         this.innerStartDate = currentDay;
@@ -99,14 +107,15 @@ export default {
       } else {
         this.isSelectingStartDay = true;
       }
-      
+
       this.innerEndDate = currentDay;
       this.selectedDay = day;
-      
+
       return this.callOnChange({
         selectedDay: currentDay,
-        startDate: this.innerStartDate
-      })
+        startDate: this.innerStartDate,
+        endDate: this.innerEndDate
+      });
     },
 
     getDayStyle: function(day) {
@@ -139,7 +148,7 @@ export default {
       isSelectingStartDay: true, // either startDay or endDay
       weekdays: utils.weekDayShortConfig,
       innerStartDate: startDate,
-      innerEndDate: singleDate? startDate : endDate
+      innerEndDate: singleDate ? startDate : endDate
     };
   }
 };
