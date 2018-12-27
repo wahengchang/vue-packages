@@ -1,5 +1,6 @@
 // Import vue component
 import DateTimePicker from "./components/DateTimePicker.vue";
+import DateTimePickerModal from "./components/DateTimePickerModal.vue";
 import Calender from "./components/DatePicker/Calender.vue";
 import TimePicker from "./components/TimePicker/index.vue";
 import DatePicker from "./components/DatePicker/index.vue";
@@ -8,7 +9,8 @@ const Components = {
   DateTimePicker,
   TimePicker,
   DatePicker,
-  Calender
+  Calender,
+  DateTimePickerModal
 };
 
 // Declare install function executed by Vue.use()
