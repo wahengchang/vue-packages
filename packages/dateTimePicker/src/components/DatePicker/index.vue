@@ -68,6 +68,7 @@ export default {
       } = this;
 
     const returnData = { month, year, startDate, endDate, selectedDay }
+
     if (this.$listeners.onChange) {
       this.$emit("onChange", returnData);
     }
@@ -96,8 +97,10 @@ export default {
     _onChange: function(data) {
       const { startDate, endDate, selectedDay } = data;
       this.innerStartDate = startDate;
+
       this.innerEndDate = endDate;
       this.selectedDay = selectedDay;
+
       return this.callOnChange();
     }
   },

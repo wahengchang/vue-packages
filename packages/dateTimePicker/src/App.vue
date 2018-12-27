@@ -31,7 +31,6 @@
       <DatePicker
         :startDate="startDate"
         :endDate="endDate"
-        :singleDate="true"
         @onChange="datePickerValue = $event"
       />
     </section>
@@ -48,14 +47,14 @@
 
     <section class="componentContainer" v-if="tapIndex === 4">
       <h1>DateTimePickerModal</h1>
+      <span>{{dateTimePickerModalValue}}</span>
       <date-time-picker-modal
-        @submitHandler="submitHandler"
+        @submitHandler="dateTimePickerModalValue = $event"
         @cancelHandler="cancelHandler"
         :startDate="startDate"
         :endDate="endDate"
         :startTime="startTime"
         :endTime="endTime"
-        :singleDate="true"
       />
     </section>
   </div>
@@ -89,6 +88,7 @@ export default {
     return {
       calenderValue: null,
       datePickerValue: null,
+      dateTimePickerModalValue: null,
       tapIndex: 0,
       startTime: {
         hh: "05",
