@@ -155,6 +155,7 @@ export default {
 .dateTimePickerWrapper {
   max-width: 768px;
   background: #fff;
+  box-shadow: 0 2px 60px rgba(183, 185, 188, 0.35);
 
   .containerWrapper {
     display: flex;

@@ -1,21 +1,20 @@
 <template>
   <div id="app">
-
-    <section class='componentContainer'>
-      <button @click='tapIndex = 0'> TimePicker </button>
-      <button @click='tapIndex = 1'> Calender </button>
-      <button @click='tapIndex = 2'> DatePicker </button>
-      <button @click='tapIndex = 3'> DateTimePicker </button>
-      <button @click='tapIndex = 4'> DateTimePickerModal </button>
+    <section class="componentContainer">
+      <button @click="tapIndex = 0">TimePicker</button>
+      <button @click="tapIndex = 1">Calender</button>
+      <button @click="tapIndex = 2">DatePicker</button>
+      <button @click="tapIndex = 3">DateTimePicker</button>
+      <button @click="tapIndex = 4">DateTimePickerModal</button>
     </section>
 
-    <section class='componentContainer' v-if="tapIndex === 0">
-      <h1>TimePicker </h1>
+    <section class="componentContainer" v-if="tapIndex === 0">
+      <h1>TimePicker</h1>
       <TimePicker />
     </section>
 
-    <section class='componentContainer' v-if="tapIndex === 1">
-      <h1>Calender </h1>
+    <section class="componentContainer" v-if="tapIndex === 1">
+      <h1>Calender</h1>
       <Calender
         :month="currentMonth"
         :year="currentYear"
@@ -24,29 +23,24 @@
       />
     </section>
 
-    <section class='componentContainer' v-if="tapIndex === 2">
-      <h1>DatePicker </h1>
-      <DatePicker
+    <section class="componentContainer" v-if="tapIndex === 2">
+      <h1>DatePicker</h1>
+      <DatePicker :startDate="startDate" :endDate="endDate" />
+    </section>
+
+    <section class="componentContainer" v-if="tapIndex === 3">
+      <h1>DateTimePicker</h1>
+      <DateTimePicker
         :startDate="startDate"
         :endDate="endDate"
+        :startTime="startTime"
+        :endTime="endTime"
       />
     </section>
 
-    <section class='componentContainer' v-if="tapIndex === 3">
-      <h1>DateTimePicker </h1>
-      <DateTimePicker
-        :startDate = "startDate"
-        :endDate = "endDate"
-        :startTime = "startTime"
-        :endTime = "endTime"
-      />
-    </section>
-
-
-    <section class='componentContainer' v-if="tapIndex === 4">
-      <h1>DateTimePickerModal </h1>
+    <section class="componentContainer" v-if="tapIndex === 4">
+      <h1>DateTimePickerModal</h1>
       <date-time-picker-modal
-
         @submitHandler="submitHandler"
         @cancelHandler="cancelHandler"
         :startDate="startDate"
@@ -61,11 +55,9 @@
 <script>
 import DateTimePicker from "./components/DateTimePicker.vue";
 import DateTimePickerModal from "./components/DateTimePickerModal.vue";
-import TimePicker from "./components/TimePicker/index.vue"
-import DatePicker from "./components/DatePicker/index.vue"
-import Calender from "./components/DatePicker/Calender.vue"
-
-
+import TimePicker from "./components/TimePicker/index.vue";
+import DatePicker from "./components/DatePicker/index.vue";
+import Calender from "./components/DatePicker/Calender.vue";
 
 export default {
   name: "app",
@@ -125,11 +117,8 @@ export default {
       padding: 2px 5px;
     }
   }
-
 }
-
 </style>
-
 
 <style lang="scss">
 @import "./style/main.scss";
