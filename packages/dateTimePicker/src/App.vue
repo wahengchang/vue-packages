@@ -39,11 +39,13 @@
 
     <section class="componentContainer" v-if="tapIndex === 3">
       <h1>DateTimePicker</h1>
+      <span>{{dateTimePickerValue}}</span>
       <DateTimePicker
         :startDate="startDate"
         :endDate="endDate"
         :startTime="startTime"
         :endTime="endTime"
+        @onChange="dateTimePickerValue = $event"
       />
     </section>
 
@@ -91,6 +93,7 @@ export default {
       calenderValue: null,
       datePickerValue: null,
       dateTimePickerModalValue: null,
+      dateTimePickerValue: null,
       tapIndex: 0,
       startTime: {
         hh: "05",
