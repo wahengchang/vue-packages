@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="demoWrapper">
+      <date-time-picker-modal></date-time-picker-modal>
+
       <date-time-picker
+        style="display:none"
         @submitHandler="submitHandler"
         @cancelHandler="cancelHandler"
         :startDate="startDate"
@@ -15,6 +18,7 @@
 
 <script>
 import DateTimePicker from "./components/DateTimePicker.vue";
+import DateTimePickerModal from "./components/DateTimePickerModal.vue";
 
 export default {
   name: "app",
@@ -27,7 +31,8 @@ export default {
     }
   },
   components: {
-    DateTimePicker
+    DateTimePicker,
+    DateTimePickerModal
   },
   data: function() {
     return {
