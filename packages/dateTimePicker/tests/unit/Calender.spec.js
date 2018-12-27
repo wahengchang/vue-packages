@@ -61,7 +61,7 @@ describe("Calender.vue: selecting days", () => {
 
 
 describe("Calender.vue: singleDay: selecting days", () => {
-  it.only("Should return 1startDay, 1endDay, 11betweenDay style", () => {
+  it("Should return 1startDay, 1endDay, 11betweenDay style", () => {
     const startDay = 1
     const endDay = 13
     const wrapper = shallowMount(Calender, {
