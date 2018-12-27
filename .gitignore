@@ -4,3 +4,4 @@ dist/
 npm-debug.log
 .vscode/
 lerna-debug.log
+env.sh
