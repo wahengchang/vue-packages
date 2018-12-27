@@ -69,7 +69,7 @@ const getDayAfter = (fromDay, n) => {
 };
 
 export default {
-  name: "DateTimePicker",
+  name: "DateTimePickerModal",
   components: { DatePicker, TimePicker },
   methods: {
     getShortMonth: function(monthIndex) {
