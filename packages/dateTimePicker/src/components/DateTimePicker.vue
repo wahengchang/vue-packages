@@ -2,7 +2,12 @@
   <div class="dateTimePickerModal">
     <a class="calendarTrigger" @click="isOpen = !isOpen">
       <icon-calendar class="iconCalendar" />
-      <input type="text" class="calendarInput" :value="selectDateString" />
+      <input
+        type="text"
+        class="calendarInput"
+        :value="selectDateString"
+        readonly="readonly"
+      />
     </a>
 
     <date-time-picker-modal
@@ -37,6 +42,8 @@ export default {
       const endAa = data.endTime.A;
 
       this.selectDateString = `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}   -   ${endYear} ${endMonth} ${endDate}  ${endHour}:${endMinute} ${endAa}`;
+
+      this.isOpen = false;
     }
   },
   data() {
@@ -103,6 +110,7 @@ export default {
       outline: none;
       margin-bottom: 10px;
       z-index: 1;
+      cursor: pointer;
     }
     .iconCalendar {
       position: absolute;

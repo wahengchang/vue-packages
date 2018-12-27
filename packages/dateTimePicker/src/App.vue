@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <section class="componentContainer">
-      <button @click="tapIndex = 0">TimePicker</button>
-      <button @click="tapIndex = 1">Calender</button>
-      <button @click="tapIndex = 2">DatePicker</button>
-      <button @click="tapIndex = 3">DateTimePicker</button>
-      <button @click="tapIndex = 4">DateTimePickerModal</button>
+      <button @click="tapIndex = 0" class="componentTab">TimePicker</button>
+      <button @click="tapIndex = 1" class="componentTab">Calender</button>
+      <button @click="tapIndex = 2" class="componentTab">DatePicker</button>
+      <button @click="tapIndex = 3" class="componentTab">DateTimePicker</button>
+      <button @click="tapIndex = 4" class="componentTab">
+        DateTimePickerModal
+      </button>
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 0">
@@ -13,9 +15,9 @@
       <TimePicker />
     </section>
 
-    <section class='componentContainer' v-if="tapIndex === 1">
-      <h1>Calender </h1>
-      <span>{{calenderValue}}</span>
+    <section class="componentContainer" v-if="tapIndex === 1">
+      <h1>Calender</h1>
+      <span>{{ calenderValue }}</span>
       <Calender
         :month="currentMonth"
         :year="currentYear"
@@ -26,8 +28,8 @@
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 2">
-      <h1>DatePicker </h1>
-      <span>{{datePickerValue}}</span>
+      <h1>DatePicker</h1>
+      <span>{{ datePickerValue }}</span>
       <DatePicker
         :startDate="startDate"
         :endDate="endDate"
@@ -122,7 +124,7 @@ export default {
     border-top: 1px lightgray solid;
     padding: 20px 0;
 
-    button {
+    .componentTab {
       border: black solid 1px;
       margin: 0 5px;
       padding: 2px 5px;
