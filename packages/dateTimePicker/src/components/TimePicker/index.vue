@@ -394,14 +394,17 @@ export default {
 
 .time-picker {
   width: 100%;
+  height: 50px;
+  display: inline-block;
   font-size: 16px;
   position: relative;
 
   input.display-time {
     width: 100%;
     border: 1px solid $silver-two;
+    background: #fff;
     border-radius: 3px;
-    height: 50px;
+    height: 100%;
     padding: 0 10px;
     letter-spacing: 4px;
     transition-duration: 0.5s;
@@ -411,13 +414,15 @@ export default {
     }
     &:focus {
       outline: none;
+      border: 1px solid $secondary-01;
     }
   }
   .clear-btn {
     position: absolute;
     z-index: 3;
-    top: 6px;
-    right: 10px;
+    top: 8px;
+    right: 20px;
+    height: 100%;
     font-size: 24px;
     color: $silver;
 
