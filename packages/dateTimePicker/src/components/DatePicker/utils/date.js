@@ -70,6 +70,13 @@ export const format = (date, formatString) => {
   return yymmdd(date);
 };
 
+export const getDayAfter = (fromDay, n) => {
+  const _fromDay = !fromDay ? new Date : fromDay
+  const otherDay = new Date(_fromDay);
+  otherDay.setDate(_fromDay.getDate() + n);
+  return otherDay;
+};
+
 export default {
   daysInMonth,
   getWeekday,
@@ -77,5 +84,6 @@ export default {
   monthConfig,
   monthShortConfig,
   isSameDay,
-  format
+  format,
+  getDayAfter
 };

@@ -63,12 +63,6 @@ const DEFAULT_END_TIME = {
   A: "PM"
 };
 
-const getDayAfter = (fromDay, n) => {
-  const otherDay = new Date(fromDay);
-  otherDay.setDate(fromDay.getDate() + n);
-  return otherDay;
-};
-
 export default {
   name: "DateTimePickerModal",
   components: { DatePicker, TimePicker },
@@ -175,7 +169,7 @@ export default {
       defaultStartTime: startTime || DEFAULT_START_TIME,
       defaultEndTime: endTime || DEFAULT_END_TIME,
       innerStartDate: startDate || today,
-      innerEndDate: endDate || getDayAfter(today, 2),
+      innerEndDate: endDate || utils.getDayAfter(today, 2),
       innerStartTime: startTime,
       innerEndTime: endTime
     };
