@@ -31,7 +31,7 @@
         </li>
       </template>
       <template v-for="(day, key) in restDates">
-        <li class="day" :key="'null' + key"></li>
+        <li class="day" :key="'restNull' + key"></li>
       </template>
     </ul>
   </div>
