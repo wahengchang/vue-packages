@@ -40,8 +40,8 @@
       </div>
     </div>
     <div class="buttonWrap">
-      <button class="confirm" @click.stop.prevent="__onSubmit">submit</button>
-      <button class="cancel" @click.stop.prevent="__onCancel">cancel</button>
+      <a class="confirm" @click.stop.prevent="__onSubmit">submit</a>
+      <a class="cancel" @click.stop.prevent="__onCancel">cancel</a>
     </div>
   </div>
 </template>
@@ -228,9 +228,11 @@ export default {
     padding: 20px;
     background: $pale-grey-two;
 
-    button {
+    a {
       padding: 0 30px;
       height: 50px;
+      line-height: 50px;
+      cursor: pointer;
       border-radius: 4px;
       font-size: 13px;
       font-weight: 700;

@@ -40,26 +40,29 @@
     <section class="componentContainer" v-if="tapIndex === 3">
       <h1>DateTimePicker</h1>
       <span>{{dateTimePickerValue}}</span>
-      <DateTimePicker
-        :startDate="startDate"
-        :endDate="endDate"
-        :startTime="startTime"
-        :endTime="endTime"
-        @onChange="dateTimePickerValue = $event"
-      />
+      <form>
+        <DateTimePicker
+          :startDate="startDate"
+          :endDate="endDate"
+          :startTime="startTime"
+          :endTime="endTime"
+          @onChange="dateTimePickerValue = $event"
+        />
+      </form>
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 4">
       <h1>DateTimePickerModal</h1>
       <span>{{dateTimePickerModalValue}}</span>
-      <date-time-picker-modal
-        @submitHandler="dateTimePickerModalValue = $event"
-        @cancelHandler="cancelHandler"
-        :startDate="startDate"
-        :endDate="endDate"
-        :startTime="startTime"
-        :endTime="endTime"
-      />
+      <form>
+        <date-time-picker-modal
+          @cancelHandler="cancelHandler"
+          :startDate="startDate"
+          :endDate="endDate"
+          :startTime="startTime"
+          :endTime="endTime"
+        />
+      </form>
     </section>
   </div>
 </template>
