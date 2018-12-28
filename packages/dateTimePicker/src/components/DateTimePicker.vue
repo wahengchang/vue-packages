@@ -48,6 +48,7 @@ export default {
     endDate: Date,
     startTime: Object,
     endTime: Object,
+
     singleDate: {
       type: Boolean,
       default: false
@@ -85,7 +86,7 @@ export default {
     this.callOnChange({ startDate, startTime, endDate, endTime });
     return {
       isOpen: false,
-      selectDateString: this.getDateString({
+      selectDateString: !startDate? '' : this.getDateString({
         startDate,
         startTime,
         endDate,

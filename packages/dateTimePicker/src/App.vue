@@ -1,6 +1,10 @@
 <template>
   <div id="app">
     <section class="componentContainer">
+      <input type="checkbox" id="checkbox" v-model="singleDate">
+      <label for="checkbox"> SingleDate </label>
+    </section>
+    <section class="componentContainer">
       <button @click="tapIndex = 0" class="componentTab">TimePicker</button>
       <button @click="tapIndex = 1" class="componentTab">Calender</button>
       <button @click="tapIndex = 2" class="componentTab">DatePicker</button>
@@ -23,6 +27,7 @@
         :year="currentYear"
         :startDate="startDate"
         :endDate="endDate"
+        :singleDate="singleDate"
         @onChange="calenderValue = $event"
       />
     </section>
@@ -33,6 +38,7 @@
       <DatePicker
         :startDate="startDate"
         :endDate="endDate"
+        :singleDate="singleDate"
         @onChange="datePickerValue = $event"
       />
     </section>
@@ -40,15 +46,10 @@
     <section class="componentContainer" v-if="tapIndex === 3">
       <h1>DateTimePicker</h1>
       <span>{{dateTimePickerValue}}</span>
-      <form>
-        <DateTimePicker
-          :startDate="startDate"
-          :endDate="endDate"
-          :startTime="startTime"
-          :endTime="endTime"
-          @onChange="dateTimePickerValue = $event"
-        />
-      </form>
+      <DateTimePicker
+        :singleDate="singleDate"
+        @onChange="dateTimePickerValue = $event"
+      />
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 4">
@@ -61,6 +62,7 @@
           :endDate="endDate"
           :startTime="startTime"
           :endTime="endTime"
+          :singleDate="singleDate"
         />
       </form>
     </section>
@@ -93,6 +95,7 @@ export default {
   },
   data: function() {
     return {
+      singleDate: false,
       calenderValue: null,
       datePickerValue: null,
       dateTimePickerModalValue: null,
