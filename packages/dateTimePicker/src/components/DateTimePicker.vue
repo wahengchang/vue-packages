@@ -86,12 +86,14 @@ export default {
     this.callOnChange({ startDate, startTime, endDate, endTime });
     return {
       isOpen: false,
-      selectDateString: !startDate? '' : this.getDateString({
-        startDate,
-        startTime,
-        endDate,
-        endTime
-      })
+      selectDateString: !startDate
+        ? ""
+        : this.getDateString({
+            startDate,
+            startTime,
+            endDate,
+            endTime
+          })
     };
   }
 };
@@ -121,13 +123,15 @@ export default {
   .dateTimeWrapper {
     opacity: 0;
     position: absolute;
+    z-index: 999;
   }
 
   .calendarTrigger {
     position: relative;
     overflow: hidden;
     display: block;
-    width: 460px;
+    width: 100%;
+    min-width: 300px;
     height: 50px;
     border-radius: 3px;
     background: #fff;
@@ -158,7 +162,6 @@ export default {
       font-size: 16px;
       padding: 20px 20px 20px 50px;
       outline: none;
-      margin-bottom: 10px;
       z-index: 1;
       cursor: pointer;
     }

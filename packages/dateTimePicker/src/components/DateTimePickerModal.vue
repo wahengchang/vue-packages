@@ -190,7 +190,7 @@ export default {
     padding: 40px 30px 20px 30px;
     .dateContainer {
       padding: 0 30px;
-      border-right: 1px solid $pale-grey;
+      border-right: 1px solid $pale-grey-two;
     }
     .timeContainer {
       padding: 0 30px;
@@ -198,10 +198,10 @@ export default {
         display: flex;
         flex-direction: column;
         text-align: left;
-        padding: 20px 0;
+        padding: 15px 0;
 
         .subTitle {
-          font-size: 12px;
+          font-size: 13px;
           color: $bluey-grey;
         }
 
@@ -219,21 +219,19 @@ export default {
     display: flex;
     width: 100%;
     flex-direction: row-reverse;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    background: $pale-grey-two;
+    padding: 20px 60px 40px 0;
+    border-top: 1px solid $pale-grey;
 
     a {
       padding: 0 30px;
-      height: 50px;
-      line-height: 50px;
+      height: 44px;
+      line-height: 44px;
       cursor: pointer;
       border-radius: 4px;
       font-size: 13px;
       font-weight: 700;
       text-transform: uppercase;
-      margin: 0 10px;
+      margin: 0 0px;
       letter-spacing: 1px;
       &:hover {
         outline: none;
@@ -245,7 +243,6 @@ export default {
       }
       &.cancel {
         color: $bluey-grey;
-        border: 1px solid $silver-two;
       }
     }
   }
@@ -259,9 +256,12 @@ export default {
         padding: 0 20px;
       }
     }
+    .buttonWrap {
+      padding: 20px 20px 40px 0;
+    }
   }
 }
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 650px) {
   .dateTimeWrapper {
     .containerWrapper {
       padding: 30px 20px;

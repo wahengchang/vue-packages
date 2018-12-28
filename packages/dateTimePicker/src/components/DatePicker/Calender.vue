@@ -30,9 +30,6 @@
           </span>
         </li>
       </template>
-      <template v-for="(day, key) in restDates">
-        <li class="day" :key="'restNull' + key"></li>
-      </template>
     </ul>
   </div>
 </template>
@@ -140,10 +137,7 @@ export default {
         new Date(`${this.year}-${this.month + 1}-1`).getTime()
       );
     },
-    restDates: function() {
-      const total = this.daysCount - this.startWeekday;
-      return total > 35 ? 42 - total : 35 - total;
-    },
+
     daysCount: function() {
       return utils.daysInMonth(this.year, this.month);
     }
@@ -164,12 +158,16 @@ export default {
 <style lang="scss" scoped>
 @import "../../style/main.scss";
 
-.calendar {
-  max-width: 380px;
+ul.calendar {
+  width: 364px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  background: #fff;
 
   li {
     display: inline-block;
-    width: calc(100% / 7);
+    width: 52px;
   }
   li.weekday {
     font-size: 14px;
@@ -187,7 +185,6 @@ export default {
       line-height: 40px;
       font-size: 15px;
       font-weight: 600;
-      margin: 2px;
       color: $slate-grey;
       background: #fff;
 
