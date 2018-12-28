@@ -36,8 +36,6 @@
       <h1>DatePicker</h1>
       <span>{{ datePickerValue }}</span>
       <DatePicker
-        :startDate="startDate"
-        :endDate="endDate"
         :singleDate="singleDate"
         @onChange="datePickerValue = $event"
       />

@@ -13,8 +13,8 @@
       <calender
         :month="currentMonth"
         :year="currentYear"
-        :startDate="startDate"
-        :endDate="endDate"
+        :startDate="innerStartDate"
+        :endDate="innerEndDate"
         :singleDate="singleDate"
         @onChange="_onChange"
       />
@@ -31,16 +31,8 @@ export default {
   name: "DatePicker",
   components: { Arrow, Calender },
   props: {
-    startDate: {
-      default: new Date(),
-      type: Date,
-      required: true
-    },
-    endDate: {
-      default: null,
-      type: Date,
-      required: true
-    },
+    startDate: Date,
+    endDate: Date,
     singleDate: {
       type: Boolean,
       default: false
@@ -106,12 +98,12 @@ export default {
   },
   data() {
     const { startDate, endDate } = this;
-
-    const defaultCurrentMonth = startDate.getMonth();
-    const defaultCurrentYear = startDate.getFullYear();
+    const _startDate = startDate? startDate : new Date()
+    const defaultCurrentMonth = _startDate.getMonth();
+    const defaultCurrentYear = _startDate.getFullYear();
     return {
-      innerStartDate: startDate,
-      innerEndDate: endDate,
+      innerStartDate: _startDate,
+      innerEndDate: endDate || utils.getDayAfter(_startDate, 2),
       selectedDay: null,
       currentYear: defaultCurrentYear,
       currentMonth: defaultCurrentMonth
