@@ -30,6 +30,9 @@
           </span>
         </li>
       </template>
+      <template v-for="(day, key) in restDates">
+        <li class="day" :key="'null' + key"></li>
+      </template>
     </ul>
   </div>
 </template>
@@ -136,6 +139,10 @@ export default {
       return utils.getWeekday(
         new Date(`${this.year}-${this.month + 1}-1`).getTime()
       );
+    },
+    restDates: function() {
+      const total = this.startWeekday - this.daysCount;
+      return total > 35 ? 42 - total : 35 - total;
     },
     daysCount: function() {
       return utils.daysInMonth(this.year, this.month);
