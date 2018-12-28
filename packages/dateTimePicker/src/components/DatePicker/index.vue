@@ -122,9 +122,9 @@ export default {
 
 <style lang="scss" scoped>
 @import "../../style/main.scss";
+
 .datePicker_wrap {
   .calendar-header {
-    width: 380px;
     display: flex;
     align-items: center;
     justify-content: space-between;
