@@ -105,7 +105,7 @@ export default {
       const startDateObject = new Date(`${startDateString}T${startTimeString}`);
 
       const returnData = {
-        startAt: startDateObject,
+        startDate: startDateObject,
         startTime,
       };
 
@@ -127,8 +127,8 @@ export default {
       const endDateObject = new Date(`${endDateString}T${endTimeString}`);
 
       const returnData = {
-        startAt: startDateObject,
-        endAt: endDateObject,
+        startDate: startDateObject,
+        endDate: endDateObject,
         startTime,
         endTime
       };

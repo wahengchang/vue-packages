@@ -23,10 +23,25 @@ import DateTimePickerModal from "./DateTimePickerModal.vue";
 import iconCalendar from "./Icons/Calendar.vue";
 import utils from "./DatePicker/utils/date";
 
+const _getDateString = (date, timeObject) => {
+  const startYear = date.getFullYear();
+  const startMonth = utils.monthShortConfig[date.getMonth()];
+  const starDate = date.getDate();
+  const startHour = timeObject.hh;
+  const startMinute = timeObject.mm;
+  const startAa = timeObject.A;
+
+  return `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}`
+}
+
 export default {
   name: "DateTimePicker",
   components: { DateTimePickerModal, iconCalendar },
   props: {
+    startDate: Date,
+    endDate: Date,
+    startTime: Object,
+    endTime: Object,
     singleDate: {
       type: Boolean,
       default: false
@@ -34,6 +49,13 @@ export default {
     onChange: Function
   },
   methods: {
+    getDateString: function(data){
+      const {singleDate} = this
+      const {startDate, startTime, endDate, endTime} = data
+      return singleDate 
+        ?_getDateString(startDate, startTime)
+        :`${_getDateString(startDate, startTime)} - ${_getDateString(endDate, endTime)}`
+    },
     callOnChange: function(returnData) {
       if (this.$listeners.onChange) {
         return this.$emit("onChange", { ...returnData });
@@ -43,49 +65,18 @@ export default {
         return this.onChange({ ...returnData });
       }
     },
-    _submitSingleHandler: function(data){
-      const startYear = data.startAt.getFullYear();
-      const startMonth = utils.monthShortConfig[data.startAt.getMonth()];
-      const starDate = data.startAt.getDate();
-      const startHour = data.startTime.hh;
-      const startMinute = data.startTime.mm;
-      const startAa = data.startTime.A;
-
-      this.selectDateString = `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}`;
-
-      this.isOpen = false;
-
-      return this.callOnChange(data)
-    },
-    _submitMultiHandler: function(data){
-      const startYear = data.startAt.getFullYear();
-      const startMonth = utils.monthShortConfig[data.startAt.getMonth()];
-      const starDate = data.startAt.getDate();
-      const startHour = data.startTime.hh;
-      const startMinute = data.startTime.mm;
-      const startAa = data.startTime.A;
-
-      const endYear = data.endAt.getFullYear();
-      const endMonth = utils.monthShortConfig[data.endAt.getMonth()];
-      const endDate = data.endAt.getDate();
-      const endHour = data.endTime.hh;
-      const endMinute = data.endTime.mm;
-      const endAa = data.endTime.A;
-
-      this.selectDateString = `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}   -   ${endYear} ${endMonth} ${endDate}  ${endHour}:${endMinute} ${endAa}`;
-
-      this.isOpen = false;
-
-      return this.callOnChange(data)
-    },
     submitHandler: function(data) {
-      return this.singleDate ? this._submitSingleHandler(data) : this._submitMultiHandler(data)
+      this.isOpen = false;
+      this.selectDateString = this.getDateString(data);
+      return this.callOnChange(data)
     }
   },
   data() {
+    const {startDate, startTime, endDate, endTime} = this
+    this.callOnChange({startDate, startTime, endDate, endTime})
     return {
       isOpen: false,
-      selectDateString: ""
+      selectDateString: this.getDateString({startDate, startTime, endDate, endTime})
     };
   }
 };

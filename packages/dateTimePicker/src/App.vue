@@ -45,7 +45,6 @@
         :endDate="endDate"
         :startTime="startTime"
         :endTime="endTime"
-        :singleDate="true"
         @onChange="dateTimePickerValue = $event"
       />
     </section>
