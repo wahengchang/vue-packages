@@ -40,8 +40,8 @@
       </div>
     </div>
     <div class="buttonWrap">
-      <button class="confirm" @click="__onSubmit">submit</button>
-      <button class="cancel" @click="__onCancel">cancel</button>
+      <button class="confirm" @click.stop.prevent="__onSubmit">submit</button>
+      <button class="cancel" @click.stop.prevent="__onCancel">cancel</button>
     </div>
   </div>
 </template>
