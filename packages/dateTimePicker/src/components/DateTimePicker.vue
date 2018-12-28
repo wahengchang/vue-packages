@@ -1,6 +1,10 @@
 <template>
-  <div class="dateTimePickerModal">
-    <a class="calendarTrigger" @click="isOpen = !isOpen">
+  <div class="dateTimePickerWrapper">
+    <a
+      class="calendarTrigger"
+      @click="isOpen = !isOpen"
+      :class="isOpen ? 'active' : ''"
+    >
       <icon-calendar class="iconCalendar" />
       <input
         type="text"
@@ -11,9 +15,11 @@
     </a>
 
     <date-time-picker-modal
+      v-if="isOpen"
       :class="isOpen ? 'fadeInDown' : ''"
       :singleDate="singleDate"
       @submitHandler="submitHandler"
+      @cancelHandler="isOpen = false"
     />
   </div>
 </template>
@@ -31,8 +37,8 @@ const _getDateString = (date, timeObject) => {
   const startMinute = timeObject.mm;
   const startAa = timeObject.A;
 
-  return `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}`
-}
+  return `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}`;
+};
 
 export default {
   name: "DateTimePicker",
@@ -49,12 +55,15 @@ export default {
     onChange: Function
   },
   methods: {
-    getDateString: function(data){
-      const {singleDate} = this
-      const {startDate, startTime, endDate, endTime} = data
-      return singleDate 
-        ?_getDateString(startDate, startTime)
-        :`${_getDateString(startDate, startTime)} - ${_getDateString(endDate, endTime)}`
+    getDateString: function(data) {
+      const { singleDate } = this;
+      const { startDate, startTime, endDate, endTime } = data;
+      return singleDate
+        ? _getDateString(startDate, startTime)
+        : `${_getDateString(startDate, startTime)} - ${_getDateString(
+            endDate,
+            endTime
+          )}`;
     },
     callOnChange: function(returnData) {
       if (this.$listeners.onChange) {
@@ -68,15 +77,20 @@ export default {
     submitHandler: function(data) {
       this.isOpen = false;
       this.selectDateString = this.getDateString(data);
-      return this.callOnChange(data)
+      return this.callOnChange(data);
     }
   },
   data() {
-    const {startDate, startTime, endDate, endTime} = this
-    this.callOnChange({startDate, startTime, endDate, endTime})
+    const { startDate, startTime, endDate, endTime } = this;
+    this.callOnChange({ startDate, startTime, endDate, endTime });
     return {
       isOpen: false,
-      selectDateString: this.getDateString({startDate, startTime, endDate, endTime})
+      selectDateString: this.getDateString({
+        startDate,
+        startTime,
+        endDate,
+        endTime
+      })
     };
   }
 };
@@ -102,16 +116,17 @@ export default {
 }
 
 /* compomnent style */
-.dateTimePickerModal {
-  .dateTimePickerWrapper {
+.dateTimePickerWrapper {
+  .dateTimeWrapper {
     opacity: 0;
+    position: absolute;
   }
+
   .calendarTrigger {
     position: relative;
     overflow: hidden;
     display: block;
-    width: 100%;
-    max-width: 480px;
+    width: 460px;
     height: 50px;
     border-radius: 3px;
     background: #fff;
@@ -124,6 +139,13 @@ export default {
         color: $secondary-01;
       }
     }
+    &.active {
+      border-color: $secondary-01;
+      .iconCalendar {
+        color: $secondary-01;
+      }
+    }
+
     .calendarInput {
       background: #fff;
       position: absolute;
