@@ -141,7 +141,7 @@ export default {
       );
     },
     restDates: function() {
-      const total = this.startWeekday - this.daysCount;
+      const total = this.daysCount - this.startWeekday;
       return total > 35 ? 42 - total : 35 - total;
     },
     daysCount: function() {
