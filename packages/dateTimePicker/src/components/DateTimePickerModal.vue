@@ -1,5 +1,5 @@
 <template>
-  <div class="dateTimePickerWrapper">
+  <div class="dateTimeWrapper">
     <div class="containerWrapper">
       <div class="dateContainer">
         <DatePicker
@@ -73,7 +73,7 @@ export default {
   name: "DateTimePickerModal",
   components: { DatePicker, TimePicker },
   methods: {
-    callEvent: function(eventName, data){
+    callEvent: function(eventName, data) {
       if (this.$listeners[eventName]) {
         return this.$emit(eventName, data);
       }
@@ -81,24 +81,26 @@ export default {
         return this[eventName](data);
       }
     },
-    __onChange: function(data){
-        return this.singleDate? this._onChangeSingleDate(data) : this._onChangeMultiDate(data)
+    __onChange: function(data) {
+      return this.singleDate
+        ? this._onChangeSingleDate(data)
+        : this._onChangeMultiDate(data);
     },
     __onSubmit: function(data) {
-        return this.singleDate? this._submitSingleHandler(data) : this._submitMultiHandler(data)
+      return this.singleDate
+        ? this._submitSingleHandler(data)
+        : this._submitMultiHandler(data);
     },
     getShortMonth: function(monthIndex) {
       return utils.monthShortConfig[monthIndex];
     },
     __onCancel: function() {
-      return this.callEvent('cancelHandler')
+      return this.callEvent("cancelHandler");
     },
-    _submitSingleHandler: function(){
+    _submitSingleHandler: function() {
       const { innerStartTime: startTime, innerEndTime: endTime } = this;
 
-      const {
-        innerStartDate: startDate,
-      } = this.$refs.datePickerRef;
+      const { innerStartDate: startDate } = this.$refs.datePickerRef;
 
       const startDateString = utils.format(startDate, "yy-mm-dd");
       const startTimeString = `${startTime.HH}:${startTime.mm}`;
@@ -106,12 +108,12 @@ export default {
 
       const returnData = {
         startDate: startDateObject,
-        startTime,
+        startTime
       };
 
-      return this.callEvent('submitHandler', returnData)
+      return this.callEvent("submitHandler", returnData);
     },
-    _submitMultiHandler: function(data){
+    _submitMultiHandler: function(data) {
       const { innerStartTime: startTime, innerEndTime: endTime } = this;
 
       const {
@@ -133,7 +135,7 @@ export default {
         endTime
       };
 
-      return this.callEvent('submitHandler', returnData)
+      return this.callEvent("submitHandler", returnData);
     },
     _onChangeMultiDate: function(data) {
       const { startDate, endDate } = data;
@@ -184,7 +186,7 @@ export default {
 <style lang="scss" scoped>
 @import "../style/main.scss";
 
-.dateTimePickerWrapper {
+.dateTimeWrapper {
   max-width: 768px;
   background: #fff;
   box-shadow: 0 2px 60px rgba(183, 185, 188, 0.35);
@@ -255,7 +257,7 @@ export default {
   }
 }
 @media only screen and (max-width: 767px) {
-  .dateTimePickerWrapper {
+  .dateTimeWrapper {
     .containerWrapper {
       padding: 30px 0;
       .timeContainer,
@@ -266,7 +268,7 @@ export default {
   }
 }
 @media only screen and (max-width: 500px) {
-  .dateTimePickerWrapper {
+  .dateTimeWrapper {
     .containerWrapper {
       padding: 30px 20px;
       display: block;
