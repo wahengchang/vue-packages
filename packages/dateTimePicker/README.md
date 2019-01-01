@@ -2,12 +2,13 @@
 
 > RWD friendly date+time picker for Vue. Supports date, datetime and time modes, and disabling dates.
 
-
+[![NPM](https://nodei.co/npm/%40lazy-copilot%2Fdatetimepicker.png)](https://nodei.co/npm/%40lazy-copilot%2Fdatetimepicker/)
 [![NPM](https://nodei.co/npm/@lazy-copilot/datetimepicker.png?downloads=true&downloadRank=true)](https://www.npmjs.com/package/@lazy-copilot/datetimepicker)
 
 ## Demo
 
-![image](https://user-images.githubusercontent.com/5538753/50449437-622be680-0962-11e9-84fd-cddc79eb151d.png)
+![image](https://user-images.githubusercontent.com/5538753/50570051-8e59c400-0db5-11e9-9d9c-767dc0dbf947.png)
+
 
 
 ## Install
@@ -23,12 +24,11 @@ $ yarn add @lazy-copilot/datetimepicker
 ```js
 <template>
   <date-time-picker
-    @submitHandler="submitHandler"
-    @cancelHandler="cancelHandler"
-    :startDate="startDate"
-    :endDate="endDate"
-    :startTime="startTime"
-    :endTime="endTime"
+    :startDate = "startDate"          //optional
+    :endDate = "endDate"              //optional
+    :startTime = "startTime"          //optional
+    :endTime = "endTime"              //optional
+    @cancelHandler="cancelHandler"    //optional
   />
 </template>
 
@@ -42,11 +42,8 @@ export default {
     DateTimePicker
   },
   methods: {
-    submitHandler: function(data) {
+    cancelHandler: function(data) {
       console.log("data: ", data);
-    },
-    cancelHandler: function() {
-      console.log("close");
     }
   },
   data: function() {
