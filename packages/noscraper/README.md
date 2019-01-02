@@ -1,34 +1,25 @@
-# noScraper
+# noscraper
+There is no silver bullet to prevent headless browser or selecnium browser to scrape your brwoser. This is a basic solution to detect `phantomjs`  and selenium base `chrome`, `firefox` browser and to handle what is going to happen. 
 
-## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![image](https://user-images.githubusercontent.com/5538753/50579654-04c3f800-0e82-11e9-85d3-069cda225204.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Run your tests
+## Install
 ```
-npm run test
+$ npm install @lazy-copilot/noscraper
+
+or 
+
+$ yarn add @lazy-copilot/noscraper
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Usage
+```js
+import noscraperPlugin from '@lazy-copilot/noscraper'
 
-### Run your unit tests
-```
-npm run test
-```
+const handler = () => window.location = 'https://yahoo.com'
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Vue.use(noscraperPlugin, handler)
+// initzially redirect to google.com, when handler s not given 
+```
