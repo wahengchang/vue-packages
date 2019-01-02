@@ -43,8 +43,6 @@ And we get the updated value by vue @event `@onChange="data=$event"`.
 |---|---|---|---|
 | startDate  |  Date | `new Date()`  |   |
 | endDate | Date  | above  |   |
-| startTime  | Object  | `{hh,mm,A}`  |   |
-| endTime  |  Object | above   |   |
 | singleDate  |  Boolean | true   | Range/Single selection, default `false`  |
 
 
@@ -62,8 +60,6 @@ And we get the updated value by vue @event `@onChange="data=$event"`.
   <date-time-picker
     :startDate = "startDate"          //optional
     :endDate = "endDate"              //optional
-    :startTime = "startTime"          //optional
-    :endTime = "endTime"              //optional
     :singleDate = "true"              //optional, default false
     @onChange = "onChange"            //optional
   />
@@ -85,18 +81,8 @@ export default {
   },
   data: function() {
     return {
-      startTime: {
-        hh: "05",
-        mm: "23",
-        A: "AM"
-      },
-      endTime: {
-        hh: "11",
-        mm: "21",
-        A: "PM"
-      },
-      startDate: new Date("2018-12-13"),
-      endDate: new Date("2018-12-16")
+      startDate: new Date("2018-12-13T00:03"),
+      endDate: new Date("2018-12-16T23:29")
     };
   }
 }

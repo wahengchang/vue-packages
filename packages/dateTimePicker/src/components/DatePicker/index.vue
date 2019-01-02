@@ -24,7 +24,7 @@
 
 <script>
 import Arrow from "../Icons/Arrow.vue";
-import utils from "./utils/date";
+import utils from "../../lib/date";
 import Calender from "./Calender.vue";
 
 export default {

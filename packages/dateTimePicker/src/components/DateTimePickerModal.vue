@@ -49,7 +49,8 @@
 <script>
 import TimePicker from "./TimePicker/index.vue";
 import DatePicker from "./DatePicker/index.vue";
-import utils from "./DatePicker/utils/date";
+import utils from "../lib/date";
+import {getTimeObjectFromDate} from "../lib/time"
 
 const DEFAULT_START_TIME = {
   hh: "00",
@@ -154,16 +155,16 @@ export default {
     submitHandler: Function,
     startDate: Date,
     endDate: Date,
-    startTime: Object,
-    endTime: Object,
     singleDate: {
       type: Boolean,
       default: false
     }
   },
   data: function() {
-    const { startDate, endDate, startTime, endTime } = this;
+    const { startDate, endDate } = this;
     const today = new Date();
+    const startTime = getTimeObjectFromDate(startDate)
+    const endTime = getTimeObjectFromDate(endDate)
 
     return {
       defaultStartTime: startTime || DEFAULT_START_TIME,

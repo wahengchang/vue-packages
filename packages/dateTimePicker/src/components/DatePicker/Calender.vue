@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import utils from "./utils/date";
+import utils from "../../lib/date";
 
 const isToday = otherDay => {
   const today = new Date();

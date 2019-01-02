@@ -71,7 +71,7 @@ import {
   initUnitWithInterval,
   initApm,
   initHours
-} from "./utils/format";
+} from "../../lib/time";
 import { formatConfig, MINUTE, SECOND } from "./config";
 
 export default {
@@ -139,7 +139,7 @@ export default {
   },
 
   watch: {
-    format: "renderFormat",
+    format: "initConfig",
     // minuteInterval (newInteval) {
     //   this.renderList(MINUTE, newInteval)
     // },
@@ -151,7 +151,7 @@ export default {
   },
 
   methods: {
-    renderFormat(newFormat) {
+    initConfig(newFormat) {
       const { minuteInterval, secondInterval } = this;
 
       newFormat = newFormat || this.format;
@@ -384,7 +384,7 @@ export default {
   },
 
   mounted() {
-    this.renderFormat();
+    this.initConfig();
   }
 };
 </script>

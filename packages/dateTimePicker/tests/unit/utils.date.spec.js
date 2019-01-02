@@ -1,4 +1,4 @@
-import date from "@/components/DatePicker/utils/date";
+import date from "@/lib/date";
 
 describe("./utils/date", () => {
   it("should have function date.daysInMonth", () => {
