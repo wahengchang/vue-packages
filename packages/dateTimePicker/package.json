@@ -6,7 +6,7 @@
   "browser": {
     "./sfc": "src/components/datetimepicker.vue"
   },
-  "version": "0.1.18",
+  "version": "0.1.19",
   "scripts": {
     "precommit": "lint-staged; npm test",
     "dev": "npm run serve",
@@ -65,7 +65,17 @@
     "url": "git+https://github.com/wahengchang/vue-packages.git"
   },
   "keywords": [
-    "vue","component","date", "time", "picker", "range", "selection", "select", "hotel", "flight", "format"
+    "vue",
+    "component",
+    "date",
+    "time",
+    "picker",
+    "range",
+    "selection",
+    "select",
+    "hotel",
+    "flight",
+    "format"
   ],
   "author": "lazy-copilot",
   "license": "ISC",

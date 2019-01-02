@@ -6,7 +6,7 @@
   "browser": {
     "./sfc": "src/components/noScraper.vue"
   },
-  "version": "0.1.18",
+  "version": "0.1.19",
   "scripts": {
     "precommit": "lint-staged; npm test",
     "dev": "npm run serve",
@@ -62,7 +62,16 @@
     "url": "git+https://github.com/wahengchang/vue-packages.git"
   },
   "keywords": [
-    "vue", "component", "phantomjs", "headless", "browser", "selenium", "prevent", "protection", "hack", "security"
+    "vue",
+    "component",
+    "phantomjs",
+    "headless",
+    "browser",
+    "selenium",
+    "prevent",
+    "protection",
+    "hack",
+    "security"
   ],
   "author": "lazy-copilot",
   "license": "ISC",
