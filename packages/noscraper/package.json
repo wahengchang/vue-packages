@@ -6,9 +6,10 @@
   "browser": {
     "./sfc": "src/components/noScraper.vue"
   },
-  "version": "0.1.7",
+  "version": "0.1.18",
   "scripts": {
     "precommit": "lint-staged; npm test",
+    "dev": "npm run serve",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build-bundle": "vue-cli-service build --target lib --name noScraper src/build.js",
