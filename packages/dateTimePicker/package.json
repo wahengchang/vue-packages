@@ -65,8 +65,7 @@
     "url": "git+https://github.com/wahengchang/vue-packages.git"
   },
   "keywords": [
-    "vue",
-    "component"
+    "vue","component","date", "time", "picker", "range", "selection", "select", "hotel", "flight", "format"
   ],
   "author": "lazy-copilot",
   "license": "ISC",

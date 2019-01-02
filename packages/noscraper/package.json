@@ -62,8 +62,7 @@
     "url": "git+https://github.com/wahengchang/vue-packages.git"
   },
   "keywords": [
-    "vue",
-    "component"
+    "vue", "component", "phantomjs", "headless", "browser", "selenium", "prevent", "protection", "hack", "security"
   ],
   "author": "lazy-copilot",
   "license": "ISC",
