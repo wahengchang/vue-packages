@@ -6,7 +6,7 @@
   "browser": {
     "./sfc": "src/components/datetimepicker.vue"
   },
-  "version": "0.1.20",
+  "version": "0.1.21",
   "scripts": {
     "precommit": "lint-staged; npm test",
     "dev": "npm run serve",
