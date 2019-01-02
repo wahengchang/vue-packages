@@ -7,7 +7,7 @@ Add a dependency to matched packages
 ```
 $ lerna add module-1 --scope=module-2
 
-// lerna add @lazy-copilot/datetimepicker --scope=@demo
+// lerna add @lazy-copilot/datetimepicker --scope=demo
 ```
 
 ## bootstrap
@@ -20,7 +20,7 @@ $ lerna bootstrap
 
 ## Publish
 ```
-$ lerna publish --force-publish=*
+$ lerna run build-bundle ; lerna publish
 ```
 
 publishing to org npm, needed to make it public on the first publish
