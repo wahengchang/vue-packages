@@ -51,3 +51,15 @@ export const initUnitWithInterval = (type, interval = 1, min = 0, max = 60, ) =>
   }
   return items
 }
+
+export const getTimeObjectFromDate  = (date) => {
+  if(typeof date !== 'object' || !date.getHours || !date.getHours()) return null
+
+  const _hour = date.getHours()
+  const hour =  _hour > 12 ? _hour - 12 : _hour
+
+  const hh = addZeroToString(hour)
+  const mm = addZeroToString(date.getMinutes())
+  const A = _hour<=12 ?'AM' : 'PM'
+  return { hh, mm, A }
+}

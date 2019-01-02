@@ -18,6 +18,8 @@
       v-if="isOpen"
       :class="isOpen ? 'fadeInDown' : ''"
       :singleDate="singleDate"
+      :startDate="startDate"
+      :endDate="endDate"
       @submitHandler="submitHandler"
       @cancelHandler="isOpen = false"
     />
@@ -27,15 +29,18 @@
 <script>
 import DateTimePickerModal from "./DateTimePickerModal.vue";
 import iconCalendar from "./Icons/Calendar.vue";
-import utils from "./DatePicker/utils/date";
+import utils from "../lib/date";
+import {getTimeObjectFromDate} from "../lib/time";
 
-const _getDateString = (date, timeObject) => {
+const _getDateString = (date) => {
   const startYear = date.getFullYear();
   const startMonth = utils.monthShortConfig[date.getMonth()];
   const starDate = date.getDate();
-  const startHour = timeObject.hh;
-  const startMinute = timeObject.mm;
-  const startAa = timeObject.A;
+
+  const timeObject = getTimeObjectFromDate(date)
+  const startHour = timeObject.hh
+  const startMinute = timeObject.mm
+  const startAa = timeObject.A
 
   return `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}`;
 };
@@ -46,9 +51,6 @@ export default {
   props: {
     startDate: Date,
     endDate: Date,
-    startTime: Object,
-    endTime: Object,
-
     singleDate: {
       type: Boolean,
       default: false
@@ -58,13 +60,10 @@ export default {
   methods: {
     getDateString: function(data) {
       const { singleDate } = this;
-      const { startDate, startTime, endDate, endTime } = data;
+      const { startDate, endDate } = data;
       return singleDate
-        ? _getDateString(startDate, startTime)
-        : `${_getDateString(startDate, startTime)} - ${_getDateString(
-            endDate,
-            endTime
-          )}`;
+        ? _getDateString(startDate)
+        : `${_getDateString(startDate)} - ${_getDateString(endDate)}`;
     },
     callOnChange: function(returnData) {
       if (this.$listeners.onChange) {
@@ -82,17 +81,15 @@ export default {
     }
   },
   data() {
-    const { startDate, startTime, endDate, endTime } = this;
-    this.callOnChange({ startDate, startTime, endDate, endTime });
+    const { startDate, endDate } = this;
+    this.callOnChange({ startDate, endDate });
     return {
       isOpen: false,
       selectDateString: !startDate
         ? ""
         : this.getDateString({
             startDate,
-            startTime,
             endDate,
-            endTime
           })
     };
   }

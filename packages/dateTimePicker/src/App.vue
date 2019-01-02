@@ -16,7 +16,10 @@
 
     <section class="componentContainer" v-if="tapIndex === 0">
       <h1>TimePicker</h1>
-      <TimePicker />
+      <TimePicker
+        v-bind:value="timePickerValue"
+        format = 'hh:mm:A'
+      />
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 1">
@@ -46,6 +49,8 @@
       <span>{{dateTimePickerValue}}</span>
       <DateTimePicker
         :singleDate="singleDate"
+        :startDate="startDate"
+        :endDate="endDate"
         @onChange="dateTimePickerValue = $event"
       />
     </section>
@@ -56,10 +61,9 @@
       <form>
         <date-time-picker-modal
           @cancelHandler="cancelHandler"
+          @submitHandler="dateTimePickerModalValue=$event"
           :startDate="startDate"
           :endDate="endDate"
-          :startTime="startTime"
-          :endTime="endTime"
           :singleDate="singleDate"
         />
       </form>
@@ -98,6 +102,7 @@ export default {
       datePickerValue: null,
       dateTimePickerModalValue: null,
       dateTimePickerValue: null,
+      timePickerValue: {hh:10, mm: 12, A:'AM'},
       tapIndex: 0,
       startTime: {
         hh: "05",
@@ -111,8 +116,8 @@ export default {
       },
       currentMonth: 11,
       currentYear: 2018,
-      startDate: new Date("2018-12-13"),
-      endDate: new Date("2018-12-16")
+      startDate: new Date("2018-12-13T09:01"),
+      endDate: new Date("2018-12-16T22:13")
     };
   }
 };
