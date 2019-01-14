@@ -16,7 +16,7 @@
 
     <date-time-picker-modal
       v-if="isOpen"
-      :class="isOpen ? 'fadeInDown' : ''"
+      :class="{ fadeInDown: isOpen, alignRight: alignRight }"
       :singleDate="singleDate"
       :startDate="startDate"
       :endDate="endDate"
@@ -30,17 +30,17 @@
 import DateTimePickerModal from "./DateTimePickerModal.vue";
 import iconCalendar from "./Icons/Calendar.vue";
 import utils from "../lib/date";
-import {getTimeObjectFromDate} from "../lib/time";
+import { getTimeObjectFromDate } from "../lib/time";
 
-const _getDateString = (date) => {
+const _getDateString = date => {
   const startYear = date.getFullYear();
   const startMonth = utils.monthShortConfig[date.getMonth()];
   const starDate = date.getDate();
 
-  const timeObject = getTimeObjectFromDate(date)
-  const startHour = timeObject.hh
-  const startMinute = timeObject.mm
-  const startAa = timeObject.A
+  const timeObject = getTimeObjectFromDate(date);
+  const startHour = timeObject.hh;
+  const startMinute = timeObject.mm;
+  const startAa = timeObject.A;
 
   return `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}`;
 };
@@ -55,6 +55,7 @@ export default {
       type: Boolean,
       default: false
     },
+    alignRight: { type: Boolean, default: false },
     onChange: Function
   },
   methods: {
@@ -89,7 +90,7 @@ export default {
         ? ""
         : this.getDateString({
             startDate,
-            endDate,
+            endDate
           })
     };
   }
@@ -119,12 +120,18 @@ export default {
 .dateTimePickerWrapper {
   .dateTimeWrapper {
     opacity: 0;
+    left: 0;
     position: absolute;
-    z-index: 999;
+    z-index: 998;
+    &.alignRight {
+      left: unset;
+      right: 0;
+    }
   }
 
   .calendarTrigger {
     position: relative;
+    z-index: 999;
     overflow: hidden;
     display: block;
     width: 100%;

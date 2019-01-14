@@ -403,7 +403,7 @@ export default {
     width: 100%;
     min-width: 200px;
     border: 1px solid $silver-two;
-    // background: #fff;
+    background: #fff;
     border-radius: 3px;
     height: 100%;
     padding: 0 10px;

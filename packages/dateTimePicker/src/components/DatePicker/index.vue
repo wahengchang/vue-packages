@@ -98,7 +98,7 @@ export default {
   },
   data() {
     const { startDate, endDate } = this;
-    const _startDate = startDate? startDate : new Date()
+    const _startDate = startDate ? startDate : new Date();
     const defaultCurrentMonth = _startDate.getMonth();
     const defaultCurrentYear = _startDate.getFullYear();
     return {
