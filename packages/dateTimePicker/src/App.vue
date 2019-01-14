@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <section class="componentContainer">
-      <input type="checkbox" id="checkbox" v-model="singleDate">
+      <input type="checkbox" id="checkbox" v-model="singleDate" />
       <label for="checkbox"> SingleDate </label>
+      <input type="checkbox" id="checkbox2" v-model="alignRight" />
+      <label for="checkbox2"> AlignRight </label>
     </section>
     <section class="componentContainer">
       <button @click="tapIndex = 0" class="componentTab">TimePicker</button>
@@ -16,10 +18,7 @@
 
     <section class="componentContainer" v-if="tapIndex === 0">
       <h1>TimePicker</h1>
-      <TimePicker
-        v-bind:value="timePickerValue"
-        format = 'hh:mm:A'
-      />
+      <TimePicker v-bind:value="timePickerValue" format="hh:mm:A" />
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 1">
@@ -46,22 +45,23 @@
 
     <section class="componentContainer" v-if="tapIndex === 3">
       <h1>DateTimePicker</h1>
-      <span>{{dateTimePickerValue}}</span>
+      <span>{{ dateTimePickerValue }}</span>
       <DateTimePicker
         :singleDate="singleDate"
         :startDate="startDate"
         :endDate="endDate"
         @onChange="dateTimePickerValue = $event"
+        :alignRight="alignRight"
       />
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 4">
       <h1>DateTimePickerModal</h1>
-      <span>{{dateTimePickerModalValue}}</span>
+      <span>{{ dateTimePickerModalValue }}</span>
       <form>
         <date-time-picker-modal
           @cancelHandler="cancelHandler"
-          @submitHandler="dateTimePickerModalValue=$event"
+          @submitHandler="dateTimePickerModalValue = $event"
           :startDate="startDate"
           :endDate="endDate"
           :singleDate="singleDate"
@@ -98,11 +98,12 @@ export default {
   data: function() {
     return {
       singleDate: false,
+      alignRight: false,
       calenderValue: null,
       datePickerValue: null,
       dateTimePickerModalValue: null,
       dateTimePickerValue: null,
-      timePickerValue: {hh:10, mm: 12, A:'AM'},
+      timePickerValue: { hh: 10, mm: 12, A: "AM" },
       tapIndex: 0,
       startTime: {
         hh: "05",
