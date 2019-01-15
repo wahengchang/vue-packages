@@ -50,7 +50,7 @@
 import TimePicker from "./TimePicker/index.vue";
 import DatePicker from "./DatePicker/index.vue";
 import utils from "../lib/date";
-import {getTimeObjectFromDate} from "../lib/time"
+import { getTimeObjectFromDate } from "../lib/time";
 
 const DEFAULT_START_TIME = {
   hh: "00",
@@ -163,8 +163,8 @@ export default {
   data: function() {
     const { startDate, endDate } = this;
     const today = new Date();
-    const startTime = getTimeObjectFromDate(startDate)
-    const endTime = getTimeObjectFromDate(endDate)
+    const startTime = getTimeObjectFromDate(startDate);
+    const endTime = getTimeObjectFromDate(endDate);
 
     return {
       defaultStartTime: startTime || DEFAULT_START_TIME,
@@ -248,36 +248,38 @@ export default {
     }
   }
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 700px) {
   .dateTimeWrapper {
+    width: 100%;
     .containerWrapper {
-      padding: 30px 0;
-      .timeContainer,
-      .dayContainer {
-        padding: 0 20px;
+      display: block;
+      .dateContainer {
+        margin-bottom: 40px;
+        border-right: none;
+        .datePicker_wrap {
+          ul.calendar {
+            li {
+              width: 70px;
+            }
+          }
+        }
       }
-    }
-    .buttonWrap {
-      padding: 20px 20px 40px 0;
     }
   }
 }
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 480px) {
   .dateTimeWrapper {
     .containerWrapper {
-      padding: 30px 20px;
-      display: block;
-      .dateContainer {
-        padding: 0;
-        border-right: 0px;
-        margin-bottom: 20px;
-      }
+      .dateContainer,
       .timeContainer {
         padding: 0;
         .timeRow {
-          padding: 10px 0;
+          padding: 8px 0;
         }
       }
+    }
+    .buttonWrap {
+      padding: 20px 30px 30px 0;
     }
   }
 }

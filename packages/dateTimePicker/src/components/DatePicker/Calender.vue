@@ -134,7 +134,7 @@ export default {
   computed: {
     startWeekday: function() {
       return utils.getWeekday(
-        new Date(`${this.year}-${this.month + 1}-1`).getTime()
+        new Date(`${this.year}-${this.month + 1}-01`).getTime()
       );
     },
 
@@ -208,6 +208,14 @@ ul.calendar {
       &.between {
         background: #eaf0fd;
       }
+    }
+  }
+}
+@media only screen and (max-width: 700px) {
+  ul.calendar {
+    width: 100%;
+    li {
+      width: calc(100% / 7);
     }
   }
 }
