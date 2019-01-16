@@ -118,6 +118,9 @@ export default {
 
 /* compomnent style */
 .dateTimePickerWrapper {
+  position: relative;
+
+  //modal
   .dateTimeWrapper {
     opacity: 0;
     left: 0;
@@ -128,7 +131,7 @@ export default {
       right: 0;
     }
   }
-
+  //trigger
   .calendarTrigger {
     position: relative;
     z-index: 999;

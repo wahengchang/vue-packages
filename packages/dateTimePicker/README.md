@@ -44,6 +44,7 @@ And we get the updated value by vue @event `@onChange="data=$event"`.
 | startDate  |  Date | `new Date()`  |   |
 | endDate | Date  | above  |   |
 | singleDate  |  Boolean | true   | Range/Single selection, default `false`  |
+| alignRight  |  Boolean | true   | Modal align-right, default `false`  |
 
 
 ### Event 
@@ -61,6 +62,7 @@ And we get the updated value by vue @event `@onChange="data=$event"`.
     :startDate = "startDate"          //optional
     :endDate = "endDate"              //optional
     :singleDate = "true"              //optional, default false
+    :alignRight = "true"              //optional, default false
     @onChange = "onChange"            //optional
   />
 </template>
