@@ -81,10 +81,10 @@ export default {
         ? this._onChangeSingleDate(data)
         : this._onChangeMultiDate(data);
     },
-    __onSubmit: function(data) {
+    __onSubmit: function() {
       return this.singleDate
-        ? this._submitSingleHandler(data)
-        : this._submitMultiHandler(data);
+        ? this._submitSingleHandler()
+        : this._submitMultiHandler();
     },
     getShortMonth: function(monthIndex) {
       return utils.monthShortConfig[monthIndex];
@@ -96,9 +96,8 @@ export default {
       const { innerStartTime: startTime, innerEndTime: endTime } = this;
 
       const { innerStartDate: startDate } = this.$refs.datePickerRef;
-
       const startDateString = utils.format(startDate, "yy-mm-dd");
-      const startTimeString = `${startTime.HH}:${startTime.mm}`;
+      const startTimeString = `${startTime.HH || '00'}:${startTime.mm || '00'}`;
       const startDateObject = new Date(`${startDateString}T${startTimeString}`);
 
       const returnData = {
@@ -161,16 +160,19 @@ export default {
     }
   },
   data: function() {
-    const { startDate = new Date(), endDate } = this;
     const today = new Date();
-    const startTime = getTimeObjectFromDate(startDate);
-    const endTime = getTimeObjectFromDate(endDate);
+    const {
+      startDate = today,
+      endDate = utils.getDayAfter(today, 2)
+    } = this;
+    const startTime = getTimeObjectFromDate(startDate) || { hh: '00', mm: '00', A: 'am' };
+    const endTime = getTimeObjectFromDate(endDate) || { hh: '23', mm: '59', A: 'pm' };
 
     return {
       defaultStartTime: startTime || DEFAULT_START_TIME,
       defaultEndTime: endTime || DEFAULT_END_TIME,
-      innerStartDate: startDate || today,
-      innerEndDate: endDate || utils.getDayAfter(today, 2),
+      innerStartDate: startDate,
+      innerEndDate: endDate,
       innerStartTime: startTime,
       innerEndTime: endTime
     };
