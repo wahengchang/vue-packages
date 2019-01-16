@@ -8,11 +8,10 @@
 		"lerna:version": "lerna version prerelease --preid beta && yarn run lerna:postversion",
 		"lerna:postversion": "chan release --group-changes $(node -p -e \"require('./lerna.json').version\") && git add CHANGELOG.md && git commit -m \"Update: changelog\" && git push --follow-tags",
 		"build-bundle": "lerna run build-bundle",
-    "lerna:publish": "lerna publish from-git --yes --npm-client yarn --npm-tag beta"
+		"lerna:publish": "lerna publish from-git --yes --npm-client yarn --npm-tag beta"
 	},
 	"devDependencies": {
 		"husky": "^0.14.3",
-		"lerna": "^2.11.0"
+		"lerna": "^3.10.5"
 	}
 }
-
