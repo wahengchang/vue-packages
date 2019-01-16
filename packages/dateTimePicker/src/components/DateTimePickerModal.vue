@@ -161,7 +161,7 @@ export default {
     }
   },
   data: function() {
-    const { startDate, endDate } = this;
+    const { startDate = new Date(), endDate } = this;
     const today = new Date();
     const startTime = getTimeObjectFromDate(startDate);
     const endTime = getTimeObjectFromDate(endDate);

@@ -53,7 +53,7 @@ export const initUnitWithInterval = (type, interval = 1, min = 0, max = 60, ) =>
 }
 
 export const getTimeObjectFromDate  = (date) => {
-  if(typeof date !== 'object' || !date.getHours || !date.getHours()) return null
+  if(typeof date !== 'object' || !date || !date.getHours || !date.getHours()) return null
 
   const _hour = date.getHours()
   const hour =  _hour > 12 ? _hour - 12 : _hour
