@@ -444,7 +444,7 @@ export default {
     position: absolute;
     z-index: 5;
     background: #fff;
-    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     width: 100%;
     height: 180px;
 
