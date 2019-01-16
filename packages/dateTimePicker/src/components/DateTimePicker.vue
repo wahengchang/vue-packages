@@ -82,7 +82,7 @@ export default {
     }
   },
   data() {
-    const { startDate, endDate } = this;
+    const { startDate = new Date(), endDate } = this;
     this.callOnChange({ startDate, endDate });
     return {
       isOpen: false,
