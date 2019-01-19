@@ -33,6 +33,8 @@ import utils from "../lib/date";
 import { getTimeObjectFromDate } from "../lib/time";
 
 const _getDateString = date => {
+  if(!date) return ''
+
   const startYear = date.getFullYear();
   const startMonth = utils.monthShortConfig[date.getMonth()];
   const starDate = date.getDate();
@@ -82,8 +84,7 @@ export default {
     }
   },
   data() {
-    const { startDate = new Date(), endDate } = this;
-    this.callOnChange({ startDate, endDate });
+    const { startDate, endDate } = this;
     return {
       isOpen: false,
       selectDateString: !startDate
