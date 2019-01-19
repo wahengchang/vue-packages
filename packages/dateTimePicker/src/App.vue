@@ -1,8 +1,10 @@
 <template>
   <div id="app">
     <section class="componentContainer">
-      <input type="checkbox" id="checkbox" v-model="singleDate">
+      <input type="checkbox" id="checkbox" v-model="singleDate" />
       <label for="checkbox"> SingleDate </label>
+      <input type="checkbox" id="checkbox2" v-model="alignRight" />
+      <label for="checkbox2"> AlignRight </label>
     </section>
     <section class="componentContainer">
       <button @click="tapIndex = 0" class="componentTab">TimePicker</button>
@@ -16,7 +18,7 @@
 
     <section class="componentContainer" v-if="tapIndex === 0">
       <h1>TimePicker</h1>
-      <TimePicker />
+      <TimePicker v-bind:value="timePickerValue" format="hh:mm:A" />
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 1">
@@ -43,23 +45,24 @@
 
     <section class="componentContainer" v-if="tapIndex === 3">
       <h1>DateTimePicker</h1>
-      <span>{{dateTimePickerValue}}</span>
+      <span>{{ dateTimePickerValue }}</span>
       <DateTimePicker
         :singleDate="singleDate"
+        
         @onChange="dateTimePickerValue = $event"
+        :alignRight="alignRight"
       />
     </section>
 
     <section class="componentContainer" v-if="tapIndex === 4">
       <h1>DateTimePickerModal</h1>
-      <span>{{dateTimePickerModalValue}}</span>
+      <span>{{ dateTimePickerModalValue }}</span>
       <form>
         <date-time-picker-modal
           @cancelHandler="cancelHandler"
+          @submitHandler="dateTimePickerModalValue = $event"
           :startDate="startDate"
           :endDate="endDate"
-          :startTime="startTime"
-          :endTime="endTime"
           :singleDate="singleDate"
         />
       </form>
@@ -94,10 +97,12 @@ export default {
   data: function() {
     return {
       singleDate: false,
+      alignRight: false,
       calenderValue: null,
       datePickerValue: null,
       dateTimePickerModalValue: null,
       dateTimePickerValue: null,
+      timePickerValue: { hh: 10, mm: 12, A: "AM" },
       tapIndex: 0,
       startTime: {
         hh: "05",
@@ -111,8 +116,8 @@ export default {
       },
       currentMonth: 11,
       currentYear: 2018,
-      startDate: new Date("2018-12-13"),
-      endDate: new Date("2018-12-16")
+      startDate: new Date("2018-12-13T09:01"),
+      endDate: new Date("2018-12-16T22:13")
     };
   }
 };

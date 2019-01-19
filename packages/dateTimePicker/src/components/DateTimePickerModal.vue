@@ -49,7 +49,8 @@
 <script>
 import TimePicker from "./TimePicker/index.vue";
 import DatePicker from "./DatePicker/index.vue";
-import utils from "./DatePicker/utils/date";
+import utils from "../lib/date";
+import { getTimeObjectFromDate } from "../lib/time";
 
 const DEFAULT_START_TIME = {
   hh: "00",
@@ -80,10 +81,10 @@ export default {
         ? this._onChangeSingleDate(data)
         : this._onChangeMultiDate(data);
     },
-    __onSubmit: function(data) {
+    __onSubmit: function() {
       return this.singleDate
-        ? this._submitSingleHandler(data)
-        : this._submitMultiHandler(data);
+        ? this._submitSingleHandler()
+        : this._submitMultiHandler();
     },
     getShortMonth: function(monthIndex) {
       return utils.monthShortConfig[monthIndex];
@@ -95,9 +96,8 @@ export default {
       const { innerStartTime: startTime, innerEndTime: endTime } = this;
 
       const { innerStartDate: startDate } = this.$refs.datePickerRef;
-
       const startDateString = utils.format(startDate, "yy-mm-dd");
-      const startTimeString = `${startTime.HH}:${startTime.mm}`;
+      const startTimeString = `${startTime.HH || '00'}:${startTime.mm || '00'}`;
       const startDateObject = new Date(`${startDateString}T${startTimeString}`);
 
       const returnData = {
@@ -154,22 +154,25 @@ export default {
     submitHandler: Function,
     startDate: Date,
     endDate: Date,
-    startTime: Object,
-    endTime: Object,
     singleDate: {
       type: Boolean,
       default: false
     }
   },
   data: function() {
-    const { startDate, endDate, startTime, endTime } = this;
     const today = new Date();
+    const {
+      startDate = today,
+      endDate = utils.getDayAfter(today, 2)
+    } = this;
+    const startTime = getTimeObjectFromDate(startDate) || { hh: '00', mm: '00', A: 'am' };
+    const endTime = getTimeObjectFromDate(endDate) || { hh: '23', mm: '59', A: 'pm' };
 
     return {
       defaultStartTime: startTime || DEFAULT_START_TIME,
       defaultEndTime: endTime || DEFAULT_END_TIME,
-      innerStartDate: startDate || today,
-      innerEndDate: endDate || utils.getDayAfter(today, 2),
+      innerStartDate: startDate,
+      innerEndDate: endDate,
       innerStartTime: startTime,
       innerEndTime: endTime
     };
@@ -247,36 +250,38 @@ export default {
     }
   }
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 700px) {
   .dateTimeWrapper {
+    width: 100%;
     .containerWrapper {
-      padding: 30px 0;
-      .timeContainer,
-      .dayContainer {
-        padding: 0 20px;
+      display: block;
+      .dateContainer {
+        margin-bottom: 40px;
+        border-right: none;
+        .datePicker_wrap {
+          ul.calendar {
+            li {
+              width: 70px;
+            }
+          }
+        }
       }
-    }
-    .buttonWrap {
-      padding: 20px 20px 40px 0;
     }
   }
 }
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 480px) {
   .dateTimeWrapper {
     .containerWrapper {
-      padding: 30px 20px;
-      display: block;
-      .dateContainer {
-        padding: 0;
-        border-right: 0px;
-        margin-bottom: 20px;
-      }
+      .dateContainer,
       .timeContainer {
         padding: 0;
         .timeRow {
-          padding: 10px 0;
+          padding: 8px 0;
         }
       }
+    }
+    .buttonWrap {
+      padding: 20px 30px 30px 0;
     }
   }
 }

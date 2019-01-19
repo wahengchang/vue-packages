@@ -71,7 +71,7 @@ import {
   initUnitWithInterval,
   initApm,
   initHours
-} from "./utils/format";
+} from "../../lib/time";
 import { formatConfig, MINUTE, SECOND } from "./config";
 
 export default {
@@ -139,7 +139,7 @@ export default {
   },
 
   watch: {
-    format: "renderFormat",
+    format: "initConfig",
     // minuteInterval (newInteval) {
     //   this.renderList(MINUTE, newInteval)
     // },
@@ -151,7 +151,7 @@ export default {
   },
 
   methods: {
-    renderFormat(newFormat) {
+    initConfig(newFormat) {
       const { minuteInterval, secondInterval } = this;
 
       newFormat = newFormat || this.format;
@@ -384,7 +384,7 @@ export default {
   },
 
   mounted() {
-    this.renderFormat();
+    this.initConfig();
   }
 };
 </script>
@@ -403,7 +403,7 @@ export default {
     width: 100%;
     min-width: 200px;
     border: 1px solid $silver-two;
-    // background: #fff;
+    background: #fff;
     border-radius: 3px;
     height: 100%;
     padding: 0 10px;
@@ -444,7 +444,7 @@ export default {
     position: absolute;
     z-index: 5;
     background: #fff;
-    box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     width: 100%;
     height: 180px;
 
