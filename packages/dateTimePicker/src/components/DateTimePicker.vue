@@ -126,7 +126,7 @@ export default {
     opacity: 0;
     left: 0;
     position: absolute;
-    z-index: 998;
+    z-index: 198;
     &.alignRight {
       left: unset;
       right: 0;
@@ -135,7 +135,7 @@ export default {
   //trigger
   .calendarTrigger {
     position: relative;
-    z-index: 999;
+    z-index: 199;
     overflow: hidden;
     display: block;
     width: 100%;
