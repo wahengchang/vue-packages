@@ -1,8 +1,8 @@
 <template>
-  <div class="dateTimePickerWrapper">
+  <div class="dateTimePickerWrapper" ref='wrapper'>
     <a
       class="calendarTrigger"
-      @click="isOpen = !isOpen"
+      @click="openHandler"
       :class="isOpen ? 'active' : ''"
     >
       <icon-calendar class="iconCalendar" />
@@ -16,12 +16,13 @@
 
     <date-time-picker-modal
       v-if="isOpen"
-      :class="{ fadeInDown: isOpen, alignRight: alignRight }"
+      :class="{ fadeInDown: isOpen }"
       :singleDate="singleDate"
       :startDate="startDate"
       :endDate="endDate"
       @submitHandler="submitHandler"
       @cancelHandler="isOpen = false"
+      :style="{marginLeft: `-${shiftMarginLeft}px`, marginTop: `-${shiftMarginHeight}px`}"
     />
   </div>
 </template>
@@ -31,6 +32,9 @@ import DateTimePickerModal from "./DateTimePickerModal.vue";
 import iconCalendar from "./Icons/Calendar.vue";
 import utils from "../lib/date";
 import { getTimeObjectFromDate } from "../lib/time";
+
+const BOX_LENGTH = 750 //px
+const BOX_HEIGHT = 510 //px
 
 const _getDateString = date => {
   if(!date) return ''
@@ -57,10 +61,39 @@ export default {
       type: Boolean,
       default: false
     },
-    alignRight: { type: Boolean, default: false },
     onChange: Function
   },
   methods: {
+    calculateShift: function(){
+      const width = window.innerWidth
+      const height = window.innerHeight
+
+      const wrapper = this.$refs.wrapper
+
+      const {x,y} = wrapper.getBoundingClientRect()
+
+      const dx = width - x
+
+      // calculate shift x
+      if(dx < BOX_LENGTH && width > 700) {  // 700 is RWD break point
+        this.shiftMarginLeft = BOX_LENGTH - dx
+      }
+
+      // calculate shift y, has enough space
+      if(y > height/2 && height > 2*BOX_HEIGHT && width > 700) {     // 700 is RWD break point
+        this.shiftMarginHeight = BOX_HEIGHT
+      }
+
+      // calculate shift y, has no enough space
+      if(height < 2*BOX_HEIGHT && width > 700) {     // 700 is RWD break point
+        const dy = height - y
+        this.shiftMarginHeight = BOX_HEIGHT - dy
+      }
+    },
+    openHandler: function(){
+      this.calculateShift()
+      return this.isOpen = !this.isOpen
+    },
     getDateString: function(data) {
       const { singleDate } = this;
       const { startDate, endDate } = data;
@@ -87,6 +120,8 @@ export default {
     const { startDate, endDate } = this;
     return {
       isOpen: false,
+      shiftMarginLeft: 0,
+      shiftMarginHeight: 0,
       selectDateString: !startDate
         ? ""
         : this.getDateString({
@@ -127,15 +162,11 @@ export default {
     left: 0;
     position: absolute;
     z-index: 198;
-    &.alignRight {
-      left: unset;
-      right: 0;
-    }
   }
   //trigger
   .calendarTrigger {
     position: relative;
-    z-index: 199;
+    z-index: 197;
     overflow: hidden;
     display: block;
     width: 100%;
