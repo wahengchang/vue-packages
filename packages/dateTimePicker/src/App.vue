@@ -1,25 +1,17 @@
 <template>
   <div id="app">
-    <section class="componentContainer">
-      <input type="checkbox" id="checkbox" v-model="singleDate" />
-      <label for="checkbox"> SingleDate </label>
-      <input type="checkbox" id="checkbox2" v-model="alignRight" />
-      <label for="checkbox2"> AlignRight </label>
-    </section>
-    <section class="componentContainer">
-      <button @click="tapIndex = 0" class="componentTab">TimePicker</button>
-      <button @click="tapIndex = 1" class="componentTab">Calender</button>
-      <button @click="tapIndex = 2" class="componentTab">DatePicker</button>
-      <button @click="tapIndex = 3" class="componentTab">DateTimePicker</button>
-      <button @click="tapIndex = 4" class="componentTab">
-        DateTimePickerModal
-      </button>
-    </section>
+  <div class="mainHeader">
+    <h1>@lazy-copilot/datetimepicker</h1>
+    <p>A dropdown time picker for Vue 2.x with flexible time format support</p>
+  </div>
+  <section class="tapsContainer">
+    <a @click="tapIndex = 0" class="componentTab" :class="tapIndex===0? 'active' : 'inactive'">TimePicker</a>
+    <a @click="tapIndex = 1" class="componentTab" :class="tapIndex===1? 'active' : 'inactive'">DateTimePicker</a>
+  </section>
 
-    <section class="componentContainer" v-if="tapIndex === 0">
-      <h1>TimePicker</h1>
-      <TimePicker v-bind:value="timePickerValue" format="hh:mm:A" />
-    </section>
+  <keep-alive>
+    <component v-bind:is="currentTabComponent"></component>
+  </keep-alive>
 
     <section class="componentContainer" v-if="tapIndex === 1">
       <h1>Calender</h1>
@@ -77,8 +69,17 @@ import TimePicker from "./components/TimePicker/index.vue";
 import DatePicker from "./components/DatePicker/index.vue";
 import Calender from "./components/DatePicker/Calender.vue";
 
+import TimePickerPage from "./pages/TimePicker.vue";
+import DateTimePickerPage from "./pages/DateTimePicker.vue";
+
 export default {
   name: "app",
+  computed: {
+    currentTabComponent: function(){
+      if(this.tapIndex === 0) return TimePickerPage
+      if(this.tapIndex === 1) return DateTimePickerPage
+    }
+  },
   methods: {
     submitHandler: function(data) {
       console.log("data: ", data);
@@ -130,7 +131,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 
   .componentContainer {
     border-top: 1px lightgray solid;
@@ -142,9 +142,65 @@ export default {
       padding: 2px 5px;
     }
   }
+
+  .mainHeader {
+    background: #19232d;
+    color: #fff;
+    text-align: center;
+    height: 150px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column nowrap;
+    flex-flow: column;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .tapsContainer {
+    background: #19232d;
+    position: relative;
+    display: flex;
+    justify-content: center;
+
+    a {
+      color: hsla(0,0%,100%,.5);
+      display: block;
+      padding: .8em .5em;
+      border-radius: 5px;
+      transition: color .3s;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .active{
+      color: #51c28f;
+    }
+
+    a.active:after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-bottom-color: #fff;
+      position: absolute;
+      bottom: -3px;
+      left: calc(50% - 10px);
+      z-index: 3;
+    }
+  }
 }
+
+
 </style>
 
 <style lang="scss">
 @import "./style/main.scss";
+
 </style>
