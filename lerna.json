@@ -2,11 +2,11 @@
   "packages": [
     "packages/*"
   ],
-  "version": "0.1.26",
+  "version": "0.1.29",
   "command": {
     "publish": {
-      "allowBranch": "release",
-      "message": "chore(release): publish %s"
+      "allowBranch": "master",
+      "message": "chore(master): publish %s"
     }
   },
   "lerna": "2.11.0",
