@@ -25,7 +25,7 @@ before_deploy:
   - git diff
 deploy:
   provider: script
-  script: "npm run lerna:publish"
+  script: "git diff; npm run lerna:publish"
   skip_cleanup: true
   on:
     node: "8"
