@@ -22,6 +22,7 @@ before_deploy:
   - git checkout release
   - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" >> $HOME/.npmrc 2> /dev/null
   - git checkout yarn.lock
+  - git checkout packages/demo/yarn.lock;
   - git diff
 deploy:
   provider: script
