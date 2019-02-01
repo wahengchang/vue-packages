@@ -10,6 +10,7 @@ install:
   - lerna bootstrap
   - yarn
 before_install:
+  - export TZ=Asia/Taipei
   - echo "Here's the NPM token:"
   - echo $NPM_TOKEN
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s
