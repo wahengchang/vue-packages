@@ -6,6 +6,9 @@ cache:
   yarn: true
   directories:
     - "node_modules"
+install:
+  - lerna bootstrap
+  - yarn
 before_install:
   - echo "Here's the NPM token:"
   - echo $NPM_TOKEN
