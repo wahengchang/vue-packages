@@ -3,6 +3,7 @@
     <section class="demoSection">
       <DateTimePicker
         :singleDate="singleDate"
+        timeFormat="HH:mm"
         @onChange="dateTimePickerValue = $event"
       />
     </section>
@@ -23,7 +24,6 @@
   </div>
 </template>
 
-
 <script>
 import DateTimePicker from "../components/DateTimePicker";
 
@@ -38,17 +38,17 @@ export default {
     }
   },
   components: {
-    DateTimePicker,
+    DateTimePicker
   },
   computed: {
-    resultString: function(){
-      return JSON.stringify(this.dateTimePickerValue, null, 4)
+    resultString: function() {
+      return JSON.stringify(this.dateTimePickerValue, null, 4);
     }
   },
   data: function() {
     return {
-      singleDate: false,
-      dateTimePickerValue: '',
+      singleDate: true,
+      dateTimePickerValue: "",
       sourcecode: `
 <TimePicker v-model="timePickerValue" format="hh:mm:A" />
 
@@ -61,31 +61,31 @@ data: function(){
 };
 </script>
 
-<style  lang="scss" scoped>
+<style lang="scss" scoped>
 .timepickerWrapper {
-    width: 100%;
-    max-width: 600px;
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  margin-top: 300px;
+
+  .demoSection {
+    width: 200px;
     margin: auto;
-    margin-top: 300px;
+  }
 
-    .demoSection {
-      width: 200px;
-      margin: auto;
-    }
+  .resultSection {
+    margin-top: 20px;
+    text-align: left;
+  }
+  .sampleSection {
+    margin-top: 20px;
+    text-align: left;
 
-    .resultSection {
-      margin-top: 20px;
-      text-align: left;
+    .exampleWrapper {
+      padding: 20px;
+      background: #eeeeee;
     }
-    .sampleSection {
-      margin-top: 20px;
-      text-align: left;
-
-      .exampleWrapper {
-        padding: 20px;
-        background: #eeeeee;
-      }
-    }
+  }
 
   h2 {
     line-height: 2.5;

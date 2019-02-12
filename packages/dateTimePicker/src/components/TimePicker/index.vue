@@ -70,9 +70,11 @@ import {
   formatValue,
   initUnitWithInterval,
   initApm,
-  initHours
+  initHours,
+  formatConfig,
+  MINUTE,
+  SECOND
 } from "../../lib/time";
-import { formatConfig, MINUTE, SECOND } from "./config";
 
 export default {
   name: "VueTimepicker",

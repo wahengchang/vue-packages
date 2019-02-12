@@ -19,7 +19,7 @@
             {{ innerStartDate.getFullYear() }}
           </div>
           <time-picker
-            format="hh:mm A"
+            :format="timeFormat"
             v-bind:value="defaultStartTime"
             @change="_onChangeTimeStart"
           />
@@ -32,7 +32,7 @@
             {{ innerEndDate.getFullYear() }}
           </div>
           <time-picker
-            format="hh:mm A"
+            :format="timeFormat"
             v-bind:value="defaultEndTime"
             @change="_onChangeTimeEnd"
           />
@@ -97,7 +97,7 @@ export default {
 
       const { innerStartDate: startDate } = this.$refs.datePickerRef;
       const startDateString = utils.format(startDate, "yy-mm-dd");
-      const startTimeString = `${startTime.HH || '00'}:${startTime.mm || '00'}`;
+      const startTimeString = `${startTime.HH || "00"}:${startTime.mm || "00"}`;
       const startDateObject = new Date(`${startDateString}T${startTimeString}`);
 
       const returnData = {
@@ -107,7 +107,7 @@ export default {
 
       return this.callEvent("submitHandler", returnData);
     },
-    _submitMultiHandler: function(data) {
+    _submitMultiHandler: function() {
       const { innerStartTime: startTime, innerEndTime: endTime } = this;
 
       const {
@@ -154,6 +154,10 @@ export default {
     submitHandler: Function,
     startDate: Date,
     endDate: Date,
+    timeFormat: {
+      type: String,
+      default: "hh:mm:A"
+    },
     singleDate: {
       type: Boolean,
       default: false
@@ -163,10 +167,11 @@ export default {
     const today = new Date();
     const {
       startDate = today,
+      timeFormat = "hh:mm:A",
       endDate = utils.getDayAfter(today, 2)
     } = this;
-    const startTime = getTimeObjectFromDate(startDate) || { hh: '00', mm: '00', A: 'am' };
-    const endTime = getTimeObjectFromDate(endDate) || { hh: '23', mm: '59', A: 'pm' };
+    const startTime = getTimeObjectFromDate(startDate, timeFormat);
+    const endTime = getTimeObjectFromDate(endDate, timeFormat);
 
     return {
       defaultStartTime: startTime || DEFAULT_START_TIME,
