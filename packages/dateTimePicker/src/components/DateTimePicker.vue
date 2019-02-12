@@ -1,5 +1,5 @@
 <template>
-  <div class="dateTimePickerWrapper" ref='wrapper'>
+  <div class="dateTimePickerWrapper" ref="wrapper">
     <a
       class="calendarTrigger"
       @click="openHandler"
@@ -20,9 +20,13 @@
       :singleDate="singleDate"
       :startDate="startDate"
       :endDate="endDate"
+      :timeFormat="timeFormat"
       @submitHandler="submitHandler"
       @cancelHandler="isOpen = false"
-      :style="{marginLeft: `-${shiftMarginLeft}px`, marginTop: `-${shiftMarginHeight}px`}"
+      :style="{
+        marginLeft: `-${shiftMarginLeft}px`,
+        marginTop: `-${shiftMarginHeight}px`
+      }"
     />
   </div>
 </template>
@@ -33,22 +37,25 @@ import iconCalendar from "./Icons/Calendar.vue";
 import utils from "../lib/date";
 import { getTimeObjectFromDate } from "../lib/time";
 
-const BOX_LENGTH = 750 //px
-const BOX_HEIGHT = 510 //px
+const BOX_LENGTH = 750; //px
+const BOX_HEIGHT = 510; //px
 
-const _getDateString = date => {
-  if(!date) return ''
+const _getDateString = (date, format = "hh:mm:A") => {
+  if (!date) return "";
 
   const startYear = date.getFullYear();
   const startMonth = utils.monthShortConfig[date.getMonth()];
   const starDate = date.getDate();
 
-  const timeObject = getTimeObjectFromDate(date);
-  const startHour = timeObject.hh;
-  const startMinute = timeObject.mm;
-  const startAa = timeObject.A;
+  const timeObject = getTimeObjectFromDate(date, format);
+  const hh = timeObject.hh;
+  const HH = timeObject.HH;
+  const mm = timeObject.mm;
+  const a = timeObject.A;
 
-  return `${startYear} ${startMonth} ${starDate}  ${startHour}:${startMinute} ${startAa}`;
+  if (HH) return `${startYear} ${startMonth} ${starDate}  ${HH}:${mm}`;
+
+  return `${startYear} ${startMonth} ${starDate}  ${hh}:${mm} ${a}`;
 };
 
 export default {
@@ -57,6 +64,10 @@ export default {
   props: {
     startDate: Date,
     endDate: Date,
+    timeFormat: {
+      type: String,
+      default: "hh:mm:A"
+    },
     singleDate: {
       type: Boolean,
       default: false
@@ -64,42 +75,48 @@ export default {
     onChange: Function
   },
   methods: {
-    calculateShift: function(){
-      const width = window.innerWidth
-      const height = window.innerHeight
+    calculateShift: function() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
 
-      const wrapper = this.$refs.wrapper
+      const wrapper = this.$refs.wrapper;
 
-      const {x,y} = wrapper.getBoundingClientRect()
+      const { x, y } = wrapper.getBoundingClientRect();
 
-      const dx = width - x
+      const dx = width - x;
 
       // calculate shift x
-      if(dx < BOX_LENGTH && width > 700) {  // 700 is RWD break point
-        this.shiftMarginLeft = BOX_LENGTH - dx
+      if (dx < BOX_LENGTH && width > 700) {
+        // 700 is RWD break point
+        this.shiftMarginLeft = BOX_LENGTH - dx;
       }
 
       // calculate shift y, has enough space
-      if(y > height/2 && height > 2*BOX_HEIGHT && width > 700) {     // 700 is RWD break point
-        this.shiftMarginHeight = BOX_HEIGHT
+      if (y > height / 2 && height > 2 * BOX_HEIGHT && width > 700) {
+        // 700 is RWD break point
+        this.shiftMarginHeight = BOX_HEIGHT;
       }
 
       // calculate shift y, has no enough space
-      if(height < 2*BOX_HEIGHT && width > 700) {     // 700 is RWD break point
-        const dy = height - y
-        this.shiftMarginHeight = BOX_HEIGHT - dy
+      if (height < 2 * BOX_HEIGHT && width > 700) {
+        // 700 is RWD break point
+        const dy = height - y;
+        this.shiftMarginHeight = BOX_HEIGHT - dy;
       }
     },
-    openHandler: function(){
-      this.calculateShift()
-      return this.isOpen = !this.isOpen
+    openHandler: function() {
+      this.calculateShift();
+      return (this.isOpen = !this.isOpen);
     },
     getDateString: function(data) {
-      const { singleDate } = this;
+      const { singleDate, timeFormat } = this;
       const { startDate, endDate } = data;
       return singleDate
-        ? _getDateString(startDate)
-        : `${_getDateString(startDate)} - ${_getDateString(endDate)}`;
+        ? _getDateString(startDate, timeFormat)
+        : `${_getDateString(startDate, timeFormat)} - ${_getDateString(
+            endDate,
+            timeFormat
+          )}`;
     },
     callOnChange: function(returnData) {
       if (this.$listeners.onChange) {
